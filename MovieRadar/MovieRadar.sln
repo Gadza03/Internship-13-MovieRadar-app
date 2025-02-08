@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRadar.Presentation", "MovieRadar.Presentation\MovieRadar.Presentation.csproj", "{EBA665C1-45F8-4E94-8AED-4A2315F73B45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRadar.Domain", "MovieRadar.Domain\MovieRadar.Domain.csproj", "{F97C5816-1DF7-4D6C-9684-5895D5A24BC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRadar.Data", "MovieRadar.Data\MovieRadar.Data.csproj", "{29335B51-0C28-474A-9ADC-515E14B0C104}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{EBA665C1-45F8-4E94-8AED-4A2315F73B45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBA665C1-45F8-4E94-8AED-4A2315F73B45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBA665C1-45F8-4E94-8AED-4A2315F73B45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F97C5816-1DF7-4D6C-9684-5895D5A24BC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F97C5816-1DF7-4D6C-9684-5895D5A24BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F97C5816-1DF7-4D6C-9684-5895D5A24BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F97C5816-1DF7-4D6C-9684-5895D5A24BC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29335B51-0C28-474A-9ADC-515E14B0C104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29335B51-0C28-474A-9ADC-515E14B0C104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29335B51-0C28-474A-9ADC-515E14B0C104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29335B51-0C28-474A-9ADC-515E14B0C104}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

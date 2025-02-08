@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MovieRadar.Data\MovieRadar.Data.csproj" />
+  </ItemGroup>
+
 </Project>

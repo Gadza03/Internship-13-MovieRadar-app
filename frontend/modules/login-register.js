@@ -37,14 +37,14 @@ export function initializeLoginRegister() {
   }
 
   signUp.addEventListener("click", () => {
-    loginForm.style.display = "none";
-    registerForm.style.display = "block";
+    loginForm.classList.add("hidden");
+    registerForm.classList.remove("hidden");
     resetFormFields();
   });
 
   logIn.addEventListener("click", () => {
-    registerForm.style.display = "none";
-    loginForm.style.display = "block";
+    registerForm.classList.add("hidden");
+    loginForm.classList.remove("hidden");
     resetFormFields();
   });
 }

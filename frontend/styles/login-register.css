@@ -106,7 +106,3 @@
 .login-register-switch__login:hover {
   color: var(--blue-color-hover);
 }
-
-.register-form {
-  display: none;
-}

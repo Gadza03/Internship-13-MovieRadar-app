@@ -1,0 +1,101 @@
+.login-register-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("../assets/images/login-register-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.login-register-form {
+  position: relative;
+  max-width: 430px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.login-register-title {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.login-register-input-field {
+  position: relative;
+  margin-top: 30px;
+  height: 50px;
+  width: 100%;
+}
+
+.login-register-input-field input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0 35px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #90909095;
+}
+
+.login-register-input-field img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.login-register-input-field .email-icon,
+.login-register-input-field .lock-icon,
+.login-register-input-field .person-icon {
+  left: 0;
+}
+
+.login-register-input-field .visibility-off-icon {
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#login-button,
+#register-button {
+  margin-top: 35px;
+  height: 50px;
+  width: 100%;
+  padding: 0 35px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+
+  background-color: var(--blue-color);
+  color: white;
+
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+}
+
+#login-button:hover,
+#register-button:hover {
+  background-color: var(--blue-color-hover);
+}
+
+.login-register-switch-text {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.register-form {
+  display: none;
+}

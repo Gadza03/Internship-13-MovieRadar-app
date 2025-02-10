@@ -1,6 +1,4 @@
 ﻿
-using Microsoft.Extensions.Configuration;
-using MovieRadar.Data;
 using Microsoft.Extensions.DependencyInjection;
 using MovieRadar.Domain.Repositories;
 using MovieRadar.Presentation.ServiceConfiguration;

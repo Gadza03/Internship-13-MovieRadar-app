@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MovieRadar.Domain.Interfaces;
 using MovieRadar.Domain.Repositories;
 
 namespace MovieRadar.API.Controllers
 {
     [Route("api/users")]
     [ApiController]
+
     public class UsersController : ControllerBase
     {
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(UserRepository userRepository) => _userRepository = userRepository;
+        public UsersController(IUserRepository userRepository) => _userRepository = userRepository;
 
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetUsers()
         {
             var users = await _userRepository.GetAllUsers();

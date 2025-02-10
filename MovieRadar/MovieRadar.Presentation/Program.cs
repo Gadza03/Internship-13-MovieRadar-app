@@ -1,37 +1,28 @@
-﻿using System;
-using System.Data;
-using Dapper;
-using Npgsql;
-using Microsoft.Extensions.Configuration;
-using MovieRadar.Data;
+﻿
 using Microsoft.Extensions.DependencyInjection;
+using MovieRadar.Domain.Repositories;
+using MovieRadar.Presentation.ServiceConfiguration;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Configure services (including loading configuration and setting up DI)
-        var serviceProvider = new ServiceCollection()
-            .AddSingleton<IConfiguration>(new ConfigurationBuilder()
-                .SetBasePath(AppContext.BaseDirectory)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build())
-            .AddSingleton<DbConnectionFactory>()
-            .BuildServiceProvider();
 
-        // Resolve the DbConnectionFactory from the container
-        var dbConnectionFactory = serviceProvider.GetService<DbConnectionFactory>();
+        var serviceProvider = ServiceConfiguration.ConfigureServices();
 
-        // Test the database connection
+        var useRepo = serviceProvider.GetService<UserRepository>();
         try
         {
-            using var connection = dbConnectionFactory.CreateConnection();
-            connection.Open();
-            Console.WriteLine("Database Connection Successful!");
+           var users = useRepo.GetAllUsers();
+            foreach (var user in users) {
+                Console.WriteLine($"User: {user.FirstName} Mail: {user.Email} isadmiin: {user.IsAdmin}");
+            }
+
+            
         }
         catch (Exception ex)
         {
-            Console.WriteLine($" Database Connection Failed: {ex.Message}");
+            Console.WriteLine($" Something went wrong: {ex.Message}");
         }
     }
 }

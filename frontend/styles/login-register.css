@@ -96,6 +96,17 @@
   font-size: 12px;
 }
 
+.login-register-switch__register,
+.login-register-switch__login {
+  color: var(--blue-color);
+  cursor: pointer;
+}
+
+.login-register-switch__register:hover,
+.login-register-switch__login:hover {
+  color: var(--blue-color-hover);
+}
+
 .register-form {
   display: none;
 }

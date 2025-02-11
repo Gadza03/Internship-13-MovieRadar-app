@@ -1,0 +1,63 @@
+.landing-page-container {
+    background-color: red;
+    width: 100vw; 
+    height: 100vh;
+}
+.landing-page-wrapper{
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 30px;
+}
+.landing-page-text h1 {
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+}
+.landing-page-text p {
+    margin-top: 20px;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+}
+.landing-page-filter {
+    align-self: flex-end;
+    padding: 15px 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-left: 30px !important;
+}
+    
+.landing-page-filter span {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+    
+#select-filter {
+    appearance: none; 
+    border: none; 
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none; 
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+    
+#select-filter option {
+    font-size: 18px;
+    padding: 10px;
+}
+
+#select-filter {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='black'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+    padding-right: 30px;
+}

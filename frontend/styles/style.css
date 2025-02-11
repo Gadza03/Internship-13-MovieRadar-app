@@ -1,0 +1,34 @@
+@import url("./fonts.css");
+
+@import url("./login-register.css");
+
+:root {
+  --blue-color: blue;
+  --blue-color-hover: rgba(34, 34, 247, 0.851);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+a {
+  color: var(--blue-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--blue-color-hover);
+}

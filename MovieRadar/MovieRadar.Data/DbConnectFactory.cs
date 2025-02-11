@@ -10,9 +10,13 @@ namespace MovieRadar.Data
 
         public DbConnectionFactory(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string is null or empty. Please check your configuration.");
+            ;
+            Console.WriteLine(_connectionString);
         }
 
         public IDbConnection CreateConnection() => new NpgsqlConnection(_connectionString);
+
     }
+
 }

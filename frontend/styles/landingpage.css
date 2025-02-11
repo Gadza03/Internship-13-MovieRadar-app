@@ -28,7 +28,6 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: white;
-    margin-left: 30px !important;
 }
     
 .landing-page-filter span {
@@ -61,3 +60,39 @@
     background-size: 18px;
     padding-right: 30px;
 }
+.movies-div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+.landing-page-movies{
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    gap: 10px;
+    width: 80%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-left:20px;
+}
+.film-card{
+    width: 100%;
+    background-color: red;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    font-size: 15px;
+}
+.film-title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* Crvena boja je dodana kako bi se lakše uočilo da je stil primijenjen na stranicu */

@@ -26,15 +26,16 @@ function LoadFilms(){
 
     let registration=document.getElementById('login-register-container');
     registration.style.display='none';
-    
 
     loadedFilms.forEach(film => {
         let filmCard = document.createElement('div');
         filmCard.classList.add('film-card');
 
+
         //title
         let filmTitle = document.createElement('h3');
         filmTitle.innerHTML = film.title;
+        filmTitle.classList.add('film-title');
 
         //desc
         let filmDescription = document.createElement('p');
@@ -48,7 +49,7 @@ function LoadFilms(){
         filmCard.appendChild(filmDescription);
         filmCard.appendChild(filmRating);
 
-        document.querySelector('.landing-page-container').appendChild(filmCard);
+        document.querySelector('.landing-page-movies').appendChild(filmCard);
         
     });
 }

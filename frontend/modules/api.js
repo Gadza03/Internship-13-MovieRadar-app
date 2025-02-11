@@ -1,27 +1,55 @@
 const API_BASE_URL = "https://localhost:7092/api";
 
 export async function loginUser(email, password) {
-  try {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+  email = email.toLowerCase();
 
-    if (!response.ok) {
-      throw new Error("Invalid credentials");
-    }
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
 
-    const data = await response.json();
-    localStorage.setItem("jwtToken", data.token);
-
-    return data.token;
-  } catch (error) {
-    console.error("Login failed:", error);
-    throw error;
+  if (!response.ok) {
+    alert("Invalid credentials");
+    return null;
   }
+
+  const data = await response.json();
+  localStorage.setItem("jwtToken", data.token);
+  return data.token;
+}
+
+export async function registerUser(firstName, lastName, email, password) {
+  email = email.toLowerCase();
+
+  const response = await fetch(`${API_BASE_URL}/auth/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ firstName, lastName, email, password }),
+  });
+
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    if (
+      response.status === 400 &&
+      responseData.message.includes("email already exists")
+    ) {
+      alert("User with this email already exists. Try another one.");
+    } else {
+      alert(
+        `Registration failed: ${responseData.message || "Try again later."}`
+      );
+    }
+    return null;
+  }
+
+  localStorage.setItem("jwtToken", responseData.token);
+  return responseData.token;
 }
 
 export async function getUsers() {

@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using MovieRadar.Data.Entities.Models;
 using MovieRadar.Domain.Interfaces;
 using Npgsql;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using MovieRadar.API.Models;
+using RegisterRequest = MovieRadar.API.Models.RegisterRequest;
+
 
 
 namespace MovieRadar.API.Controllers
@@ -72,6 +76,55 @@ namespace MovieRadar.API.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        {
+            try
+            {
+                var existingUser = await _userRepository.GetUserByEmail(request.Email);
+                if (existingUser != null)
+                {
+                    return BadRequest(new { message = "User with this email already exists." });
+                }
+
+                var newUser = new User
+                {
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Email = request.Email.ToLower(),
+                    Password = request.Password,
+                    IsAdmin = false
+                };
+
+                await _userRepository.CreateUser(newUser);
+
+                var createdUser = await _userRepository.GetUserByEmail(newUser.Email);
+                if (createdUser == null)
+                {
+                    return StatusCode(500, new { message = "User registration failed." });
+                }
+
+                var token = GenerateJwtToken(createdUser.Email, createdUser.IsAdmin);
+                if (string.IsNullOrEmpty(token))
+                {
+                    return StatusCode(500, new { message = "Token problem" });
+                }
+                return Ok(new { token });
+            }
+            catch (NpgsqlException npgsqlEx)
+            {
+                Console.WriteLine($"Database error: {npgsqlEx.Message}");
+                return StatusCode(500, new { message = "Database error. Please try again later." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Register error: {ex.Message}");
+                return StatusCode(500, new { message = "Internal Server Error" });
+            }
+        }
+
+
     }
 }
 

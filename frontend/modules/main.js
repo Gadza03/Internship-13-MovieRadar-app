@@ -1,4 +1,4 @@
-import { loginUser, logout } from "./api.js";
+import { loginUser, logout, registerUser } from "./api.js";
 import { initializeLoginRegister } from "../modules/login-register.js";
 import { validateEmail } from "./helpers.js";
 
@@ -10,7 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
     loginButton.addEventListener("click", async (event) => {
       event.preventDefault();
 
-      const email = document.getElementById("login-email").value.trim();
+      const email = document
+        .getElementById("login-email")
+        .value.trim()
+        .toLowerCase();
       const password = document.getElementById("login-password").value.trim();
 
       if (!email || !password) {
@@ -24,20 +27,20 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       loginButton.disabled = true;
+      const token = await loginUser(email, password);
 
-      try {
-        const token = await loginUser(email, password);
-        alert("Login successful!");
-        initializeLoginRegister();
-        document
-          .querySelector(".login-register-container")
-          .classList.add("hidden");
-        //document.querySelector(".landing-page-container").classList.remove("hidden");
+      if (!token) {
         loginButton.disabled = false;
-      } catch (error) {
-        alert("Login failed. Check your credentials.");
-        loginButton.disabled = false;
+        return;
       }
+
+      alert("Login successful!");
+      initializeLoginRegister();
+      document
+        .querySelector(".login-register-container")
+        .classList.add("hidden");
+      //document.querySelector(".landing-page-container").classList.remove("hidden");
+      loginButton.disabled = false;
     });
   }
 
@@ -52,7 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const lastName = document
         .getElementById("register-last-name")
         .value.trim();
-      const email = document.getElementById("register-email").value.trim();
+      const email = document
+        .getElementById("register-email")
+        .value.trim()
+        .toLowerCase();
       const password = document
         .getElementById("register-password")
         .value.trim();
@@ -68,22 +74,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       registerButton.disabled = true;
+      const token = await registerUser(firstName, lastName, email, password);
 
-      try {
-        // Call registerUser() when implemented in BE
-        alert("Registration successful!");
-        initializeLoginRegister();
-        document.querySelector(".register-form").classList.add("hidden");
-        document.querySelector(".login-form").classList.remove("hidden");
-        document
-          .querySelector(".login-register-container")
-          .classList.add("hidden");
-        //document.querySelector(".landing-page-container").classList.remove("hidden");
+      if (!token) {
         registerButton.disabled = false;
-      } catch (error) {
-        alert("Registration failed. Try again.");
-        registerButton.disabled = false;
+        return;
       }
+
+      alert("Registration successful!");
+      initializeLoginRegister();
+      document.querySelector(".register-form").classList.add("hidden");
+      document.querySelector(".login-form").classList.remove("hidden");
+      document
+        .querySelector(".login-register-container")
+        .classList.add("hidden");
+      //document.querySelector(".landing-page-container").classList.remove("hidden");
+      registerButton.disabled = false;
     });
   }
 

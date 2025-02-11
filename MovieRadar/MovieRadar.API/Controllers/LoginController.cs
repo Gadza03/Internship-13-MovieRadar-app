@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MovieRadar.Domain.Interfaces;
+using Npgsql;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -25,14 +26,28 @@ namespace MovieRadar.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            var user = await _userRepository.GetUserByEmail(request.Email);
-            if (user == null || user.Password != request.Password) 
+            try
             {
-                return Unauthorized(new { message = "Invalid credentials" });
-            }
+                var user = await _userRepository.GetUserByEmail(request.Email);
+                if (user == null || user.Password != request.Password)
+                {
+                    return Unauthorized(new { message = "Invalid credentials" });
+                }
 
-            var token = GenerateJwtToken(user.Email, user.IsAdmin);
-            return Ok(new { token });
+                var token = GenerateJwtToken(user.Email, user.IsAdmin);
+                return Ok(new { token });
+
+            }
+            catch (NpgsqlException npgsqlEx)
+            {
+                Console.WriteLine($"Database error: {npgsqlEx.Message}");
+                return StatusCode(500, new { message = "Database error. Please try again later." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Login error: {ex.Message}");
+                return StatusCode(500, new { message = "Internal Server Error" });
+            }
         }
 
         private string GenerateJwtToken(string email, bool isAdmin)

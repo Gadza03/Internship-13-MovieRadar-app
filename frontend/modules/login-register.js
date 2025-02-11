@@ -7,6 +7,8 @@ export function initializeLoginRegister() {
   const signUp = document.querySelector(".login-register-switch__register");
   const logIn = document.querySelector(".login-register-switch__login");
 
+  resetFormFields();
+
   showHide.forEach((eyeIcon) => {
     eyeIcon.addEventListener("click", () => {
       const parent = eyeIcon.closest(".login-register-input-field");

@@ -13,8 +13,11 @@ namespace MovieRadar.Data.Entities.Models
         public string? ImageUrl { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public List<Review>? Reviews { get; set; }
 
+
+
+        public List<Review>? Reviews { get; set; }
+        public List<Comment>? CommentsOnReview { get; set; }
 
     }
 

@@ -1,4 +1,6 @@
-﻿namespace MovieRadar.API.DTOs
+﻿using MovieRadar.Data.Entities.Models;
+
+namespace MovieRadar.API.DTOs
 {
     public class MovieDto
     {

@@ -13,9 +13,12 @@ namespace MovieRadar.Domain.Repositories
         public MovieRepository(DbConnectionFactory dbConnection) => _dbConnection = dbConnection;
         public async Task<Movie> GetSingleMovieInfo(int id)
         {
-            var query = "SELECT * FROM Movies WHERE Id = @id;" +
-                "SELECT AVG(rating) FROM Ratings WHERE MovieId = @id;" +
-                "SELECT * FROM Reviews WHERE MovieId = @id";
+            var query = @"
+                SELECT * FROM Movies WHERE Id = @id;
+                SELECT AVG(Rating) FROM Ratings WHERE MovieId = @id;
+                SELECT * FROM Reviews WHERE MovieId = @id;
+                SELECT * FROM Comments WHERE ReviewId IN (SELECT Id FROM Reviews WHERE MovieId = @id);
+                ";
 
             using (var connection = _dbConnection.CreateConnection())
             using (var multi = await connection.QueryMultipleAsync(query, new { id }))
@@ -28,6 +31,9 @@ namespace MovieRadar.Domain.Repositories
 
                     var reviews = (await multi.ReadAsync<Review>()).ToList();
                     movie.Reviews = reviews;
+
+                    var comments = (await multi.ReadAsync<Comment>()).ToList();
+                    movie.CommentsOnReview = comments;
                 }
 
                 return movie;

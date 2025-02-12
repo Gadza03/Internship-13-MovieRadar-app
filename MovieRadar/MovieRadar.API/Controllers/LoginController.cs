@@ -7,8 +7,8 @@ using Npgsql;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using MovieRadar.API.Models;
 using RegisterRequest = MovieRadar.API.Models.RegisterRequest;
+using MovieRadar.API.DTOs.Auth;
 
 
 
@@ -38,7 +38,10 @@ namespace MovieRadar.API.Controllers
                     return Unauthorized(new { message = "Invalid credentials" });
                 }
 
-                var token = GenerateJwtToken(user.Email, user.IsAdmin);
+                var token = GenerateJwtToken(user.Id, user.IsAdmin);
+
+                SetTokenInsideCookie(token, HttpContext);
+
                 return Ok(new { token });
 
             }
@@ -54,14 +57,14 @@ namespace MovieRadar.API.Controllers
             }
         }
 
-        private string GenerateJwtToken(string email, bool isAdmin)
+        private TokenDto GenerateJwtToken(int id, bool isAdmin)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Email, email),
+                new Claim("id", id.ToString()),
                 new Claim("isAdmin", isAdmin.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
@@ -74,7 +77,23 @@ namespace MovieRadar.API.Controllers
                 signingCredentials: credentials
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return new TokenDto { AccessToken = accessToken};
+        }
+
+        private void SetTokenInsideCookie(TokenDto tokenDto, HttpContext context)
+        {
+            context.Response.Cookies.Append("accessToken", tokenDto.AccessToken,
+              new CookieOptions
+              {
+                  Expires = DateTime.UtcNow.AddMinutes(30),
+                  HttpOnly = true,
+                  IsEssential = true,
+                  SameSite = SameSiteMode.None,
+                  Secure = true 
+              });
+
         }
 
         [HttpPost("register")]
@@ -105,8 +124,8 @@ namespace MovieRadar.API.Controllers
                     return StatusCode(500, new { message = "User registration failed." });
                 }
 
-                var token = GenerateJwtToken(createdUser.Email, createdUser.IsAdmin);
-                if (string.IsNullOrEmpty(token))
+                var token = GenerateJwtToken(createdUser.Id, createdUser.IsAdmin);
+                if (token is null)
                 {
                     return StatusCode(500, new { message = "Token problem" });
                 }

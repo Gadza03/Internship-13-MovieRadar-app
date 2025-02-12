@@ -39,6 +39,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
 
     };
+
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = ctx =>
+        {
+            ctx.Request.Cookies.TryGetValue("accessToken", out var accesToken);
+            if (!string.IsNullOrEmpty(accesToken)) 
+                ctx.Token = accesToken;
+
+            return Task.CompletedTask;
+        }
+    }; 
 });
 
 

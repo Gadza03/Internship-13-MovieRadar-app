@@ -71,17 +71,16 @@
     display: flex;
     flex-direction: column;
     align-self: flex-start;
-    gap: 10px;
+    gap: 40px;
     width: 80%;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-left:20px;
+    margin-left:40px;
 }
 .film-card{
     width: 100%;
-    background-color: red;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -89,9 +88,32 @@
     padding: 10px;
     font-size: 15px;
 }
+.film-card:hover{
+    transform: scale(1.5); 
+    padding: 30px; 
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    line-height: 2;
+}
+.film-card:hover p{
+    font-size: 11px;
+}
+.film-card:hover .film-title{
+    font-size: 18px;
+}
 .film-title{
     font-size: 20px;
     font-weight: bold;
+}
+
+.hidden-text {
+    display: none;
+}
+
+.film-card:hover .hidden-text {
+    display: block;
 }
 
 

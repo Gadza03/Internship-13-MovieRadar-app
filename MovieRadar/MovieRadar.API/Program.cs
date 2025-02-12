@@ -13,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<DbConnectionFactory>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {

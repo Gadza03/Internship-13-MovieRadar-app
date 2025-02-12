@@ -9,10 +9,13 @@ namespace MovieRadar.Data.Entities.Models
         public string? Description { get; set; }
         public int GenreId { get; set; }  
         public int ReleaseYear { get; set; }
-        public decimal AverageRating { get; set; }
+        public float AverageRating { get; set; }
         public string? ImageUrl { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public List<Review>? Reviews { get; set; }
+
+
     }
 
 }

@@ -33,7 +33,12 @@ namespace MovieRadar.Domain.Repositories
                     movie.Reviews = reviews;
 
                     var comments = (await multi.ReadAsync<Comment>()).ToList();
-                    movie.CommentsOnReview = comments;
+
+                    foreach (var review in movie.Reviews)
+                    {
+                        review.Comments = comments.Where(c => c.ReviewId == review.Id).ToList();
+                    }
+
                 }
 
                 return movie;

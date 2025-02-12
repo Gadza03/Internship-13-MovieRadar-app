@@ -17,7 +17,6 @@ namespace MovieRadar.Data.Entities.Models
 
 
         public List<Review>? Reviews { get; set; }
-        public List<Comment>? CommentsOnReview { get; set; }
 
     }
 

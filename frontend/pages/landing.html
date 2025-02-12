@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="icon" href="./assets/icons/movie-icon.png" type="image/x-icon" />
+
+    <title>Movie Radar</title>
+  </head>
+  <body>
+  
+    <!--Landing Page-->
+    <section class="landing-page-container">
+      <div class="landing-page-wrapper">
+        <header class="landing-page-text">
+            <h1>Dobrodošli u Movie Radar</h1>
+            <p>
+                Stranica za sve potrebne filmske informacije na 
+                jednome mjestu.
+            </p>
+        </header>
+
+        <div class="landing-page-filter">
+            <span>Sortiraj</span>
+            <select id="select-filter">
+                <option value="Default">Nema filtera</option>
+                <option value="Title">Žanr</option>
+                <option value="Year">Godina</option>
+                <option value="Genre">Rating</option>
+            </select>
+        </div>
+
+        <div class="landing-page-movies"></div>
+    </div>
+    </section>
+
+    
+    <script src="../modules/main.js" type="module"></script>
+    <script src="../modules/api.js" type="module"></script>
+  </body>
+</html>

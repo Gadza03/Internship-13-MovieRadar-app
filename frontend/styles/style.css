@@ -2,6 +2,8 @@
 
 @import url("./login-register.css");
 
+@import "./single-film.css";
+
 :root {
   --blue-color: blue;
   --blue-color-hover: rgba(34, 34, 247, 0.851);

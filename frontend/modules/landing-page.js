@@ -91,12 +91,21 @@ function displayFilms(){
         filmYear.innerHTML = `Year: ${film.releaseYear}`;
         filmYear.classList.add('hidden-text');
 
+        //Picture 
+        let filmPicture = document.createElement('img');
+        //filmPicture.src = film.imageUrl;
+        filmPicture.src = '../assets/images/interstellar-movie.jpg';
+        filmPicture.classList.add('film-picture-hidden');
+        
+
         // Append elements
         filmCard.appendChild(filmTitle);
         filmCard.appendChild(filmDescription);
         filmCard.appendChild(filmRating);
         filmCard.appendChild(filmGenre);
         filmCard.appendChild(filmYear);
+        filmCard.appendChild(filmPicture);
+        filmCard.appendChild(filmPicture);
 
         container.appendChild(filmCard);
     });

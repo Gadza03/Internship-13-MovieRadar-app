@@ -1,7 +1,5 @@
-.landing-page-container {
+body{
     background-color: red;
-    width: 100vw; 
-    height: 100vh;
 }
 .landing-page-wrapper{
     display: flex;
@@ -28,6 +26,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: white;
+    transform: translateX(-30px);
 }
     
 .landing-page-filter span {

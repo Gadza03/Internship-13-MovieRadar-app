@@ -1,4 +1,5 @@
 const API_BASE_URL = "https://localhost:7092/api";
+
 document.addEventListener("DOMContentLoaded", function () {
     if (window.location.pathname.includes('landing.html')) {
         displayFilms();
@@ -6,41 +7,30 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 async function LoadFilms(){    
     try{
-        let loadedFilms = [];
-        const res=await fetch(`${API_BASE_URL}/movies`);
+        const res = await fetch(`${API_BASE_URL}/movies`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        const genreRes = await fetch(`${API_BASE_URL}/genres`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
         if(!res.ok){
             throw new Error('Failed to load films');
         }
+        if(!genreRes.ok){
+            throw new Error('Failed to load genres');
+        }
         const films=await res.json();
-        console.log(films);
-        // films.forEach(film => {
-        //     loadedFilms.push(film);
-        // });
-        let film1={
-            title:'The Dark Knight',
-            description:'Batman raises the stakes in his war on crime. With the help of Lieutenant Jim Gordon and District Attorney Harvey Dent, Batman sets out to',
-            rating:9.0, 
-            genre:'Action',
-            year:2008
-        }
-        let film2={
-            title:'The Dark Knight',
-            description:'Batman raises the stakes in his war on crime. With the help of Lieutenant Jim Gordon and District Attorney Harvey Dent, Batman sets out to sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-            rating:9.0, 
-            genre:'Action',
-            year:2008
-        }
-        let film3={
-            title:'The Dark Knight',
-            description:'Batman raises the stakes in his war on crime. With the help of Lieutenant Jim Gordon and District Attorney Harvey Dent, Batman sets out to',
-            rating:9.0,
-            genre:'Action',
-            year:2008
-        }
-        loadedFilms.push(film1);
-        loadedFilms.push(film2);
-        loadedFilms.push(film3);
-        localStorage.setItem("films", JSON.stringify(loadedFilms));
+        const genres=await genreRes.json();
+
+        localStorage.setItem("films", JSON.stringify(films));
+        localStorage.setItem("genres", JSON.stringify(genres));
     
         window.location.href = './pages/landing.html';
     }
@@ -51,6 +41,7 @@ async function LoadFilms(){
 
 function displayFilms(){
     let films = JSON.parse(localStorage.getItem("films")) || [];
+    let genres = JSON.parse(localStorage.getItem("genres")) || [];
 
     let container = document.querySelector('.landing-page-movies');
 
@@ -69,16 +60,21 @@ function displayFilms(){
 
         // Rating
         let filmRating = document.createElement('p');
-        filmRating.innerHTML = `Rating: ${film.rating}`;
+        filmRating.innerHTML = `Rating: ${film.averageRating}`;
 
         // Genre
         let filmGenre = document.createElement('p');
-        filmGenre.innerHTML = `Genre: ${film.genre}`;
-        filmGenre.classList.add('hidden-text');
+        for (let i = 0; i < genres.length; i++) {
+            if (genres[i].id === film.genreId) {
+            filmGenre.innerHTML = `Zanr: ${genres[i].name}`;
+            filmGenre.classList.add('hidden-text');
+            break;
+            }
+        }
 
         // Year
         let filmYear = document.createElement('p');
-        filmYear.innerHTML = `Year: ${film.year}`;
+        filmYear.innerHTML = `Year: ${film.releaseYear}`;
         filmYear.classList.add('hidden-text');
 
         // Append elements

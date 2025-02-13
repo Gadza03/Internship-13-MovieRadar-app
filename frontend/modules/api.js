@@ -63,15 +63,13 @@ export async function getUsers() {
   return await response.json();
 }
 
+//Logout for later
 export async function logout() {
   await fetch(`${API_BASE_URL}/auth/logout`, {
     method: "POST",
     credentials: "include",
   });
 
-  document
-    .querySelector(".login-register-container")
-    .classList.remove("hidden");
-  //document.querySelector(".landing-page-container").classList.add("hidden");
+  window.location.href = "../index.html";
   initializeLoginRegister();
 }

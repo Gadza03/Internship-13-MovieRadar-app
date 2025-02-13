@@ -2,6 +2,10 @@ import { loginUser, logout, registerUser } from "./api.js";
 import { initializeLoginRegister } from "../modules/login-register.js";
 import { validateEmail, validateName, validatePassword } from "./helpers.js";
 
+window.addEventListener("pageshow", () => {
+  initializeLoginRegister();
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   initializeLoginRegister();
 
@@ -48,13 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      alert("Login successful!");
-      initializeLoginRegister();
-      document
-        .querySelector(".login-register-container")
-        .classList.add("hidden");
-      //document.querySelector(".landing-page-container").classList.remove("hidden");
-      loginButton.disabled = false;
+      window.location.href = "../pages/landing.html";
     });
   }
 
@@ -111,15 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      alert("Registration successful!");
-      initializeLoginRegister();
-      document.querySelector(".register-form").classList.add("hidden");
-      document.querySelector(".login-form").classList.remove("hidden");
-      document
-        .querySelector(".login-register-container")
-        .classList.add("hidden");
-      //document.querySelector(".landing-page-container").classList.remove("hidden");
-      registerButton.disabled = false;
+      window.location.href = "../pages/landing.html";
     });
   }
 

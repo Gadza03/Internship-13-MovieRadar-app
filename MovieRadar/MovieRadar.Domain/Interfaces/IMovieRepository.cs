@@ -5,6 +5,7 @@ namespace MovieRadar.Domain.Interfaces
 {
     public interface IMovieRepository
     {
-        Task<Movie> GetSingleMovieInfo(int id);
+        public Task<Movie> GetSingleMovieInfo(int id);
+        public Task<string> GetGenreNameById(int id);
     }
 }

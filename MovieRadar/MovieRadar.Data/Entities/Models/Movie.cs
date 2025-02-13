@@ -7,7 +7,8 @@ namespace MovieRadar.Data.Entities.Models
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public int GenreId { get; set; }  
+        public int GenreId { get; set; }
+        public string? GenreName { get; set; }
         public int ReleaseYear { get; set; }
         public float AverageRating { get; set; }
         public string? ImageUrl { get; set; }
@@ -17,6 +18,7 @@ namespace MovieRadar.Data.Entities.Models
 
 
         public List<Review>? Reviews { get; set; }
+        public List<Comment>? Comments { get; set; }
 
     }
 

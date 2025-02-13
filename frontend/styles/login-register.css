@@ -106,3 +106,10 @@
 .login-register-switch__login:hover {
   color: var(--blue-color-hover);
 }
+
+.form-error-message {
+  text-align: center;
+  color: red;
+  font-size: 12px;
+  margin-top: 10px;
+}

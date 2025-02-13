@@ -25,6 +25,10 @@ export function initializeLoginRegister() {
   });
 
   function resetFormFields() {
+    document.querySelectorAll(".form-error-message").forEach((err) => {
+      err.innerHTML = "";
+    });
+
     document.querySelectorAll("input").forEach((input) => {
       input.value = "";
     });

@@ -9,16 +9,17 @@ export async function loginUser(email, password) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
+    credentials: "include",
   });
 
+  const responseData = await response.json();
+
   if (!response.ok) {
-    alert("Invalid credentials");
-    return null;
+    alert(responseData.message || "Login failed. Try again later.");
+    return false;
   }
 
-  const data = await response.json();
-  localStorage.setItem("jwtToken", data.token);
-  return data.token;
+  return true;
 }
 
 export async function registerUser(firstName, lastName, email, password) {
@@ -30,41 +31,23 @@ export async function registerUser(firstName, lastName, email, password) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ firstName, lastName, email, password }),
+    credentials: "include",
   });
 
   const responseData = await response.json();
 
   if (!response.ok) {
-    if (
-      response.status === 400 &&
-      responseData.message.includes("email already exists")
-    ) {
-      alert("User with this email already exists. Try another one.");
-    } else {
-      alert(
-        `Registration failed: ${responseData.message || "Try again later."}`
-      );
-    }
-    return null;
+    alert(responseData.message || "Registration failed. Try again later.");
+    return false;
   }
 
-  localStorage.setItem("jwtToken", responseData.token);
-  return responseData.token;
+  return true;
 }
 
 export async function getUsers() {
-  const token = localStorage.getItem("jwtToken");
-
-  if (!token) {
-    logout();
-    return;
-  }
-
   const response = await fetch(`${API_BASE_URL}/users`, {
     method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    credentials: "include",
   });
 
   if (response.status === 401) {
@@ -80,8 +63,12 @@ export async function getUsers() {
   return await response.json();
 }
 
-export function logout() {
-  localStorage.removeItem("jwtToken");
+export async function logout() {
+  await fetch(`${API_BASE_URL}/auth/logout`, {
+    method: "POST",
+    credentials: "include",
+  });
+
   document
     .querySelector(".login-register-container")
     .classList.remove("hidden");

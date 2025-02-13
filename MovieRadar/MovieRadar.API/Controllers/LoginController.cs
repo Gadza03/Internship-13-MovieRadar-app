@@ -12,7 +12,7 @@ namespace MovieRadar.API.Controllers
     [Route("api/auth")]
     [ApiController]
     public class LoginController : ControllerBase
-    {
+    {   
         private readonly IConfiguration _configuration;
         private readonly IUserRepository _userRepository;
 

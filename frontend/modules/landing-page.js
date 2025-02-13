@@ -3,6 +3,7 @@ const API_BASE_URL = "https://localhost:7092/api";
 document.addEventListener("DOMContentLoaded", function () {
     if (window.location.pathname.includes('landing.html')) {
         displayFilms();
+        displayAdminButtons();  
     }
 });
 async function LoadFilms(){    
@@ -20,17 +21,30 @@ async function LoadFilms(){
                 'Content-Type': 'application/json'
             },
         });
+
+        // const loggedUser=await fetch(`${API_BASE_URL}/users`, {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         credetials: 'include'
+        //     },
+        // });
         if(!res.ok){
             throw new Error('Failed to load films');
         }
         if(!genreRes.ok){
             throw new Error('Failed to load genres');
         }
+        // if(!loggedUser.ok){
+        //     throw new Error('Failed to load user');
+        // }
         const films=await res.json();
         const genres=await genreRes.json();
+        //const user=await loggedUser.json();
 
         localStorage.setItem("films", JSON.stringify(films));
         localStorage.setItem("genres", JSON.stringify(genres));
+        //localStorage.setItem("user", JSON.stringify(user));
     
         window.location.href = './pages/landing.html';
     }
@@ -86,6 +100,41 @@ function displayFilms(){
 
         container.appendChild(filmCard);
     });
+}
+
+function displayAdminButtons(){
+    //let user = JSON.parse(localStorage.getItem("user")) || {};
+   // if(user.isAdmin){
+        const adminPanel = document.querySelector('.admin-functions');
+        adminPanel.classList.remove('hidden');
+
+       const addFilmButton = document.createElement('button');
+       addFilmButton.innerHTML = 'Dodaj film';
+       addFilmButton.classList.add('admin-button');
+       addFilmButton.addEventListener('click', () => {
+              window.location.href = './add-film.html';
+        });
+
+        const editFilmButton = document.createElement('button');
+        editFilmButton.innerHTML = 'Izmjeni film';
+        editFilmButton.classList.add('admin-button');
+        editFilmButton.addEventListener('click', () => {
+            window.location.href = './edit-film.html';
+        });
+
+        const deleteFilmButton =document.createElement('button', 'Izbrisi film');
+        deleteFilmButton.innerHTML = 'Izbrisi film';
+        deleteFilmButton.classList.add('admin-button');
+        deleteFilmButton.addEventListener('click', () => {
+            window.location.href = './delete-film.html';
+        });
+
+        adminPanel.appendChild(addFilmButton);
+        adminPanel.appendChild(editFilmButton);
+        adminPanel.appendChild(deleteFilmButton);
+
+
+    //}
 }
 
 export{LoadFilms};

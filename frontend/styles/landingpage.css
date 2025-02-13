@@ -114,6 +114,28 @@ body{
 .film-card:hover .hidden-text {
     display: block;
 }
+.admin-button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.admin-button:hover{
+    background-color: #45a049;
+    cursor: pointer;
+}
+.admin-functions{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    margin-top: 20px;
+}
 
 
 /* Crvena boja je dodana kako bi se lakše uočilo da je stil primijenjen na stranicu */

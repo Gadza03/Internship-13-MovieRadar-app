@@ -1,7 +1,5 @@
 body {
-  background-color: rgb(236, 235, 235);
-
-  width: auto;
+  background-color: rgb(255, 255, 255);
 }
 
 [data-tab-content] {
@@ -28,11 +26,12 @@ body {
 }
 
 .info-wrapper {
+  margin-top: 1rem;
   max-width: 1000px;
   background-color: white;
   padding-block: 3rem;
   border-radius: 1rem;
-  height: 100vh;
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2), 5px 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .tabs li {
@@ -128,7 +127,7 @@ body {
   .info-wrapper {
     width: 100%;
     padding-block: 1rem;
-    height: auto;
+    margin-top: 0;
   }
 
   .movie-info {

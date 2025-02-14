@@ -1,4 +1,4 @@
-import { LoadFilms } from "./landing-page.js";
+import { LoadFilms } from "./api.js";
 
 export function initializeLoginRegister() {
   const registerForm = document.querySelector(".register-form");
@@ -51,6 +51,6 @@ export function initializeLoginRegister() {
   });
 
   let btn=document.getElementById('login-button');
-  btn.addEventListener('click', LoadFilms,); //ovo je samo testno, da vidin kako se stranica ponasa i da vidin jeli sve dobro loadano
+  btn.addEventListener('click', LoadFilms); //ovo je samo testno, da vidin kako se stranica ponasa i da vidin jeli sve dobro loadano
 }
 

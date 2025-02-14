@@ -11,6 +11,7 @@ using MovieRadar.API.Models;
 using MovieRadar.API.DTOs.Auth;
 using RegisterRequest = MovieRadar.API.Models.RegisterRequest;
 using LoginRequest = MovieRadar.API.Models.LoginRequest;
+using Microsoft.AspNetCore.Identity;
 
 namespace MovieRadar.API.Controllers
 {
@@ -36,7 +37,18 @@ namespace MovieRadar.API.Controllers
             }
 
             var user = await _userRepository.GetUserByEmail(request.Email);
-            if (user == null || user.Password != request.Password)
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Invalid credentials" });
+            }
+
+            var passwordHasher = new PasswordHasher<User>();
+            //only few users with isHashed=false for app testing
+            bool isHashed = user.Password?.Length > 60;
+
+            if (isHashed
+            ? passwordHasher.VerifyHashedPassword(user, user.Password, request.Password) != PasswordVerificationResult.Success
+            : user.Password != request.Password)
             {
                 return Unauthorized(new { message = "Invalid credentials" });
             }
@@ -100,14 +112,17 @@ namespace MovieRadar.API.Controllers
                 return BadRequest(new { message = "User with this email already exists." });
             }
 
+            var passwordHasher = new PasswordHasher<User>();
+
             var newUser = new User
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email.ToLower(),
-                Password = request.Password,
                 IsAdmin = false
             };
+
+            newUser.Password = passwordHasher.HashPassword(newUser, request.Password);
 
             await _userRepository.CreateUser(newUser);
 

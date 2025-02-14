@@ -1,6 +1,10 @@
 import { LoadFilms } from "./api.js";
 
+import { resetFormFields } from "./helpers.js";
+
 export function initializeLoginRegister() {
+  resetFormFields();
+
   const registerForm = document.querySelector(".register-form");
   const loginForm = document.querySelector(".login-form");
 
@@ -23,20 +27,6 @@ export function initializeLoginRegister() {
       }
     });
   });
-
-  function resetFormFields() {
-    document.querySelectorAll("input").forEach((input) => {
-      input.value = "";
-    });
-
-    document.querySelectorAll(".input-password").forEach((input) => {
-      input.type = "password";
-    });
-
-    showHide.forEach((icon) => {
-      icon.src = "./assets/icons/visibility_off.svg";
-    });
-  }
 
   signUp.addEventListener("click", () => {
     loginForm.classList.add("hidden");

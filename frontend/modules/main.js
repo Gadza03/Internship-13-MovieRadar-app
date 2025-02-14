@@ -2,10 +2,6 @@ import { loginUser, logout, registerUser } from "./api.js";
 import { initializeLoginRegister } from "./login-register.js";
 import { validateEmail, validateName, validatePassword } from "./helpers.js";
 
-window.addEventListener("pageshow", () => {
-  initializeLoginRegister();
-});
-
 document.addEventListener("DOMContentLoaded", () => {
   initializeLoginRegister();
 

@@ -7,10 +7,10 @@ using Npgsql;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using RegisterRequest = MovieRadar.API.Models.RegisterRequest;
+using MovieRadar.API.Models;
 using MovieRadar.API.DTOs.Auth;
-
-
+using RegisterRequest = MovieRadar.API.Models.RegisterRequest;
+using LoginRequest = MovieRadar.API.Models.LoginRequest;
 
 namespace MovieRadar.API.Controllers
 {
@@ -30,6 +30,11 @@ namespace MovieRadar.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var user = await _userRepository.GetUserByEmail(request.Email);
             if (user == null || user.Password != request.Password)
             {
@@ -84,6 +89,11 @@ namespace MovieRadar.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var existingUser = await _userRepository.GetUserByEmail(request.Email);
             if (existingUser != null)
             {

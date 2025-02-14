@@ -1,4 +1,8 @@
+import { resetFormFields } from "./helpers.js";
+
 export function initializeLoginRegister() {
+  resetFormFields();
+
   const registerForm = document.querySelector(".register-form");
   const loginForm = document.querySelector(".login-form");
 
@@ -6,8 +10,6 @@ export function initializeLoginRegister() {
 
   const signUp = document.querySelector(".login-register-switch__register");
   const logIn = document.querySelector(".login-register-switch__login");
-
-  resetFormFields();
 
   showHide.forEach((eyeIcon) => {
     eyeIcon.addEventListener("click", () => {
@@ -23,24 +25,6 @@ export function initializeLoginRegister() {
       }
     });
   });
-
-  function resetFormFields() {
-    document.querySelectorAll(".form-error-message").forEach((err) => {
-      err.innerHTML = "";
-    });
-
-    document.querySelectorAll("input").forEach((input) => {
-      input.value = "";
-    });
-
-    document.querySelectorAll(".input-password").forEach((input) => {
-      input.type = "password";
-    });
-
-    showHide.forEach((icon) => {
-      icon.src = "./assets/icons/visibility_off.svg";
-    });
-  }
 
   signUp.addEventListener("click", () => {
     loginForm.classList.add("hidden");

@@ -15,7 +15,11 @@ export async function loginUser(email, password) {
   const responseData = await response.json();
 
   if (!response.ok) {
-    alert(responseData.message || "Login failed. Try again later.");
+    if (responseData.errors) {
+      alert(Object.values(responseData.errors).flat().join("\n"));
+    } else {
+      alert(responseData.message || "Login failed. Try again later.");
+    }
     return false;
   }
 
@@ -37,7 +41,11 @@ export async function registerUser(firstName, lastName, email, password) {
   const responseData = await response.json();
 
   if (!response.ok) {
-    alert(responseData.message || "Registration failed. Try again later.");
+    if (responseData.errors) {
+      alert(Object.values(responseData.errors).flat().join("\n"));
+    } else {
+      alert(responseData.message || "Registration failed. Try again later.");
+    }
     return false;
   }
 

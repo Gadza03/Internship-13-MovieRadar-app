@@ -1,5 +1,5 @@
 import { loginUser, logout, registerUser } from "./api.js";
-import { initializeLoginRegister } from "../modules/login-register.js";
+import { initializeLoginRegister } from "./login-register.js";
 import { validateEmail, validateName, validatePassword } from "./helpers.js";
 
 window.addEventListener("pageshow", () => {
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!validatePassword(password)) {
         displayError(
           "register",
-          "Password must be at least 5 characters long and contain a number."
+          "Password must contain at least one letter, one number, and be at least 5 characters long."
         );
         return;
       }

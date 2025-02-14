@@ -35,5 +35,15 @@ namespace MovieRadar.Domain.Repositories
                 return user; 
             }
         }
+
+        public async Task CreateUser(User user)
+        {
+            var sql = "INSERT INTO users (firstname, lastname, email, password, isadmin) VALUES (@FirstName, @LastName, @Email, @Password, @IsAdmin)";
+            using (var connection = _dbConnection.CreateConnection())
+            {
+                await connection.ExecuteAsync(sql, user);
+            }
+        }
+
     }
 }

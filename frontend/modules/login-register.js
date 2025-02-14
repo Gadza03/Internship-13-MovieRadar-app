@@ -1,5 +1,3 @@
-import { LoadFilms } from "./api.js";
-
 import { resetFormFields } from "./helpers.js";
 
 export function initializeLoginRegister() {
@@ -39,8 +37,5 @@ export function initializeLoginRegister() {
     loginForm.classList.remove("hidden");
     resetFormFields();
   });
-
-  let btn=document.getElementById('login-button');
-  btn.addEventListener('click', LoadFilms); //ovo je samo testno, da vidin kako se stranica ponasa i da vidin jeli sve dobro loadano
 }
 

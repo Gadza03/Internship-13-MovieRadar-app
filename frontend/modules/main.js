@@ -1,6 +1,7 @@
-import { loginUser, logout, registerUser } from "./api.js";
+import { loginUser, logout, registerUser,getUserByEmail } from "./api.js";
 import { initializeLoginRegister } from "./login-register.js";
 import { validateEmail, validateName, validatePassword } from "./helpers.js";
+import { LoadFilms } from "./api.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeLoginRegister();
@@ -48,7 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      window.location.href = "../pages/landing.html";
+      getUserByEmail(email);
+      LoadFilms();
     });
   }
 
@@ -105,7 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      window.location.href = "../pages/landing.html";
+      getUserByEmail(email);
+      LoadFilms();
     });
   }
 

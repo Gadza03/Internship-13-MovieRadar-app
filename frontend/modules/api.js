@@ -16,36 +16,25 @@ export async function LoadFilms(){
             },
         });
 
-        // const loggedUser=await fetch(`${API_BASE_URL}/users`, {
-        //     method: 'GET',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         credetials: 'include'
-        //     },
-        // });
         if(!res.ok){
             throw new Error('Failed to load films');
         }
         if(!genreRes.ok){
             throw new Error('Failed to load genres');
         }
-        // if(!loggedUser.ok){
-        //     throw new Error('Failed to load user');
-        // }
+
         const films=await res.json();
         const genres=await genreRes.json();
-        //const user=await loggedUser.json();
 
         localStorage.setItem("films", JSON.stringify(films));
         localStorage.setItem("genres", JSON.stringify(genres));
-        //localStorage.setItem("user", JSON.stringify(user));
         
         window.location.href = './pages/landing.html';
     }
     catch(err){
         console.log(err);
     }
-}const API_BASE_URL = "https://localhost:7092/api";
+}
 
 export async function loginUser(email, password) {
   email = email.toLowerCase();
@@ -67,10 +56,10 @@ export async function loginUser(email, password) {
     } else {
       alert(responseData.message || "Login failed. Try again later.");
     }
-    return false;
+    return { success: false, data: null };
   }
 
-  return true;
+  return { success: true, data: responseData };
 }
 
 export async function registerUser(firstName, lastName, email, password) {
@@ -93,10 +82,10 @@ export async function registerUser(firstName, lastName, email, password) {
     } else {
       alert(responseData.message || "Registration failed. Try again later.");
     }
-    return false;
+    return { success: false, data: null};
   }
 
-  return true;
+  return { success: true, data: responseData };;
 }
 
 export async function getUsers() {
@@ -116,6 +105,21 @@ export async function getUsers() {
   }
 
   return await response.json();
+}
+
+export async function getUserByEmail(email) {
+    const response = await fetch(`${API_BASE_URL}/users/${email}`, {
+        method: "GET",
+        credentials: "include",
+    });
+    
+    if (!response.ok) {
+        throw new Error("Unauthorized access");
+    }
+    
+    let user = await response.json();
+    localStorage.setItem("user", JSON.stringify(user));
+
 }
 
 //Logout for later

@@ -66,8 +66,9 @@ function displayFilms(){
 }
 
 function displayAdminButtons(){
-    //let user = JSON.parse(localStorage.getItem("user")) || {};
-   // if(user.isAdmin){
+    let user = JSON.parse(localStorage.getItem("user")) || {};
+    
+    if(user.isAdmin){
         const adminPanel = document.querySelector('.admin-functions');
         adminPanel.classList.remove('hidden');
 
@@ -95,7 +96,5 @@ function displayAdminButtons(){
         adminPanel.appendChild(addFilmButton);
         adminPanel.appendChild(editFilmButton);
         adminPanel.appendChild(deleteFilmButton);
-
-
-    //}
+    }
 }

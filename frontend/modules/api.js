@@ -79,5 +79,4 @@ export async function logout() {
   });
 
   window.location.href = "../index.html";
-  initializeLoginRegister();
 }

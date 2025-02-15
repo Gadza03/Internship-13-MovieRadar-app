@@ -26,15 +26,19 @@ export function initializeLoginRegister() {
     });
   });
 
-  signUp.addEventListener("click", () => {
-    loginForm.classList.add("hidden");
-    registerForm.classList.remove("hidden");
-    resetFormFields();
-  });
+  if (signUp) {
+    signUp.addEventListener("click", () => {
+      loginForm.classList.add("hidden");
+      registerForm.classList.remove("hidden");
+      resetFormFields();
+    });
+  }
 
-  logIn.addEventListener("click", () => {
-    registerForm.classList.add("hidden");
-    loginForm.classList.remove("hidden");
-    resetFormFields();
-  });
+  if (logIn) {
+    logIn.addEventListener("click", () => {
+      registerForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+      resetFormFields();
+    });
+  }
 }

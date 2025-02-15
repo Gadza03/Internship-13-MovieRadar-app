@@ -4,12 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/style.css" />
-    <link rel="icon" href="./assets/icons/movie-icon.png" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="../assets/icons/movie-icon.png"
+      type="image/x-icon"
+    />
 
     <title>Movie Radar</title>
   </head>
   <body>
-
     <div class="movie-adding-container">
       <h1>Add a new movie</h1>
       <form id="add-movie-form">
@@ -34,13 +37,7 @@
           placeholder="Genre"
           required
         />
-        <input
-          type="text"
-          id="year"
-          name="year"
-          placeholder="Year"
-          required
-        />
+        <input type="text" id="year" name="year" placeholder="Year" required />
         <input
           type="text"
           id="poster"
@@ -65,7 +62,6 @@
       </form>
     </div>
 
-    
     <script src="../modules/main.js" type="module"></script>
     <script src="../modules/api.js" type="module"></script>
   </body>

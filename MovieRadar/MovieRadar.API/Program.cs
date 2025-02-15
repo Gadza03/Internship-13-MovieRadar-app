@@ -17,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
-        policy => policy.WithOrigins("http://127.0.0.1:5501")// mislin da je odi posto svak ima valjda svoju adresu se minja, jedino mozda stavi allow any origin
+        policy => policy.WithOrigins("http://127.0.0.1:5500")// mislin da je odi posto svak ima valjda svoju adresu se minja, jedino mozda stavi allow any origin
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials());

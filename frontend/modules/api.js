@@ -35,6 +35,37 @@ export async function LoadFilms() {
   }
 }
 
+export async function LoadFilteredFilms(
+  genreId,
+  releaseYear,
+  minRating,
+  sortBy
+) {
+  try {
+    let url = `${API_BASE_URL}/movies/filter?`;
+
+    if (genreId) url += `genreId=${genreId}&`;
+    if (releaseYear) url += `releaseYear=${releaseYear}&`;
+    if (minRating) url += `minRating=${minRating}&`;
+    if (sortBy) url += `sortBy=${sortBy}&`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!res.ok) {
+      alert("Failed to load filtered movies");
+      return [];
+    }
+
+    return await res.json();
+  } catch (err) {
+    console.error("Error loading filtered films:", err);
+    return [];
+  }
+}
+
 export async function loginUser(email, password) {
   email = email.toLowerCase();
 

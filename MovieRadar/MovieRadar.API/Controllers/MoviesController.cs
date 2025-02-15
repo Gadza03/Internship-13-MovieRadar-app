@@ -37,5 +37,12 @@ namespace MovieRadar.API.Controllers
             return Ok();
         }
 
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetFilteredMovies([FromQuery] int? genreId, [FromQuery] int? releaseYear, [FromQuery] float? minRating, [FromQuery] string sortBy)
+        {
+            var movies = await _movieRepository.GetFilteredMovies(genreId, releaseYear, minRating, sortBy);
+            return Ok(movies);
+        }
+
     }
 }

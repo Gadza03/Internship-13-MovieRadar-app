@@ -6,5 +6,6 @@ namespace MovieRadar.Domain.Interfaces
     {
         public Task<IEnumerable<Movie>> GetAllFilms();
         public Task CreateMovie(Movie movie);
+        public Task<IEnumerable<Movie>> GetFilteredMovies(int? genreId, int? releaseYear, float? minRating, string sortBy);
     }
 }

@@ -29,10 +29,27 @@
         <span>Sort</span>
         <select id="select-filter">
           <option value="Default">Default</option>
-          <option value="Title">Genre</option>
+          <option value="Genre">Genre</option>
           <option value="Year">Release Year</option>
-          <option value="Genre">Rating</option>
+          <option value="Rating">Rating</option>
         </select>
+        <select id="genre-dropdown" class="hidden">
+          <option value="">Select Genre</option>
+        </select>
+        <input
+          type="number"
+          id="year-input"
+          placeholder="Enter Release Year"
+          class="hidden"
+        />
+        <input
+          type="number"
+          step="0.1"
+          id="rating-input"
+          placeholder="Min Rating (e.g., 4.0)"
+          class="hidden"
+        />
+        <button id="filter-button" class="hidden">Apply Filter</button>
       </div>
       <div class="landing-page-movies"></div>
     </div>

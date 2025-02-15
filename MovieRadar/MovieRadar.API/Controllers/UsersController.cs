@@ -21,6 +21,18 @@ namespace MovieRadar.API.Controllers
         {
             var users = await _userRepository.GetAllUsers();
             return Ok(users);
-        }   
+        }
+
+        [HttpGet("{email}")]
+        [Authorize]
+        public async Task<IActionResult> GetUserByEmail(string email)
+        {
+            var user = await _userRepository.GetUserByEmail(email);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
     }
 }

@@ -59,12 +59,6 @@
   left: 0;
 }
 
-.login-register-input-field .show-hide-icon {
-  right: 0;
-  padding: 10px;
-  cursor: pointer;
-}
-
 #login-button,
 #register-button {
   margin-top: 35px;
@@ -105,4 +99,18 @@
 .login-register-switch__register:hover,
 .login-register-switch__login:hover {
   color: var(--blue-color-hover);
+}
+
+.form-error-message {
+  text-align: center;
+  color: red;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.login-register-input-field .show-hide-icon {
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
 }

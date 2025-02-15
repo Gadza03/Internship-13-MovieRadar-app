@@ -2,7 +2,7 @@
 using MovieRadar.Data.Entities.Models;
 using MovieRadar.Domain.Interfaces;
 using Dapper;
-using System.Security.Cryptography;
+
 
 namespace MovieRadar.Domain.Repositories
 {
@@ -16,9 +16,10 @@ namespace MovieRadar.Domain.Repositories
         {
             var query = @"
                 SELECT * FROM Movies WHERE Id = @id;
-                SELECT AVG(Rating) FROM Ratings WHERE MovieId = @id;
+                SELECT AVG(RatingValue) FROM Ratings WHERE MovieId = @id;
+                SELECT * FROM Ratings WHERE MovieId = @id; 
                 SELECT * FROM Reviews WHERE MovieId = @id;
-                SELECT * FROM Comments WHERE MovieId = @id;
+                SELECT * FROM Comments WHERE ReviewId IN (SELECT Id FROM Reviews WHERE MovieId = @id);
                 ";
 
             using (var connection = _dbConnection.CreateConnection())
@@ -30,6 +31,9 @@ namespace MovieRadar.Domain.Repositories
                     var avgRating = await multi.ReadSingleOrDefaultAsync<float>();
                     movie.AverageRating = avgRating;
 
+                    var ratings = (await multi.ReadAsync<Rating>()).ToList();
+                    movie.Ratings = ratings;
+
                     var genreName = await GetGenreNameById(movie.GenreId);
                     movie.GenreName = genreName;
 
@@ -37,7 +41,12 @@ namespace MovieRadar.Domain.Repositories
                     movie.Reviews = reviews;
 
                     var comments = (await multi.ReadAsync<Comment>()).ToList();
-                    movie.Comments = comments;
+                    
+                    foreach (var review in movie.Reviews)
+                    {
+                        review.Comments = comments.Where(c => c.ReviewId == review.Id).ToList();
+                    }
+
 
                 }
 
@@ -52,6 +61,18 @@ namespace MovieRadar.Domain.Repositories
             {
                 var genre = await connection.QueryFirstOrDefaultAsync<string>(query, new { id });
                 return genre;
+            }
+        }
+
+        public async Task<IEnumerable<Movie>> GetAllFilms()
+        {
+            var sql = "SELECT * FROM MOVIES";
+            using (var connection = _dbConnection.CreateConnection())
+            {
+                var movies = await connection.QueryAsync<Movie>(sql);
+                return movies.ToList();
+
+
             }
         }
     }

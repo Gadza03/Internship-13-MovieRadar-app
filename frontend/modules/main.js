@@ -1,14 +1,30 @@
-import { loginUser, logout, registerUser } from "./api.js";
-import { initializeLoginRegister } from "../modules/login-register.js";
-import { validateEmail } from "./helpers.js";
+import { loginUser, logout, registerUser,getUserByEmail } from "./api.js";
+import { initializeLoginRegister } from "./login-register.js";
+import { validateEmail, validateName, validatePassword } from "./helpers.js";
+import { LoadFilms } from "./api.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeLoginRegister();
+
+  function displayError(form, message) {
+    const errorDiv = document.getElementById(`${form}-error-message`);
+    if (errorDiv) {
+      errorDiv.innerHTML = message;
+    }
+  }
+
+  function clearError(form) {
+    const errorDiv = document.getElementById(`${form}-error-message`);
+    if (errorDiv) {
+      errorDiv.innerHTML = "";
+    }
+  }
 
   const loginButton = document.getElementById("login-button");
   if (loginButton) {
     loginButton.addEventListener("click", async (event) => {
       event.preventDefault();
+      clearError("login");
 
       const email = document
         .getElementById("login-email")
@@ -17,30 +33,24 @@ document.addEventListener("DOMContentLoaded", () => {
       const password = document.getElementById("login-password").value.trim();
 
       if (!email || !password) {
-        alert("Please fill in all fields.");
+        displayError("login", "Please fill in all fields.");
         return;
       }
 
       if (!validateEmail(email)) {
-        alert("Invalid email format.");
+        displayError("login", "Invalid email format.");
         return;
       }
 
       loginButton.disabled = true;
-      const token = await loginUser(email, password);
 
-      if (!token) {
+      if (!(await loginUser(email, password))) {
         loginButton.disabled = false;
         return;
       }
 
-      alert("Login successful!");
-      initializeLoginRegister();
-      document
-        .querySelector(".login-register-container")
-        .classList.add("hidden");
-      //document.querySelector(".landing-page-container").classList.remove("hidden");
-      loginButton.disabled = false;
+      getUserByEmail(email);
+      LoadFilms();
     });
   }
 
@@ -48,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (registerButton) {
     registerButton.addEventListener("click", async (event) => {
       event.preventDefault();
+      clearError("register");
 
       const firstName = document
         .getElementById("register-first-name")
@@ -64,32 +75,40 @@ document.addEventListener("DOMContentLoaded", () => {
         .value.trim();
 
       if (!firstName || !lastName || !email || !password) {
-        alert("Please fill in all fields.");
+        displayError("register", "Please fill in all fields.");
+        return;
+      }
+
+      if (!validateName(firstName) || !validateName(lastName)) {
+        displayError(
+          "register",
+          "First and last name must have at least 2 characters."
+        );
         return;
       }
 
       if (!validateEmail(email)) {
-        alert("Invalid email format.");
+        displayError("register", "Invalid email format.");
+        return;
+      }
+
+      if (!validatePassword(password)) {
+        displayError(
+          "register",
+          "Password must contain at least one letter, one number, and be at least 5 characters long."
+        );
         return;
       }
 
       registerButton.disabled = true;
-      const token = await registerUser(firstName, lastName, email, password);
 
-      if (!token) {
+      if (!(await registerUser(firstName, lastName, email, password))) {
         registerButton.disabled = false;
         return;
       }
 
-      alert("Registration successful!");
-      initializeLoginRegister();
-      document.querySelector(".register-form").classList.add("hidden");
-      document.querySelector(".login-form").classList.remove("hidden");
-      document
-        .querySelector(".login-register-container")
-        .classList.add("hidden");
-      //document.querySelector(".landing-page-container").classList.remove("hidden");
-      registerButton.disabled = false;
+      getUserByEmail(email);
+      LoadFilms();
     });
   }
 

@@ -18,11 +18,15 @@ namespace MovieRadar.API.Controllers
             return Ok(movies);  
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> AddMovie([FromBody] Movie movie)
         {
-            var newMovie =new Movie
+            if (movie == null)
             {
+                return BadRequest("Movie data is invalid.");
+            }
+            var newMovie =new Movie
+            {   
                 Title = movie.Title,
                 Description = movie.Description,
                 GenreId = movie.GenreId,

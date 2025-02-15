@@ -79,8 +79,8 @@ function displayAdminButtons(){
        addFilmButton.innerHTML = 'Dodaj film';
        addFilmButton.classList.add('admin-button');
        addFilmButton.addEventListener('click', () => {
-              window.location.href = './add-film.html';
-        });
+        window.location.href = './add-film.html';
+    });
 
         const editFilmButton = document.createElement('button');
         editFilmButton.innerHTML = 'Izmjeni film';

@@ -132,3 +132,30 @@ export async function logout() {
   window.location.href = "../index.html";
   initializeLoginRegister();
 }
+
+export async function AddFilm(film){
+    try{
+        const res = await fetch(`${API_BASE_URL}/movies/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(film)
+        });
+
+        if(!res.ok){
+            throw new Error('Failed to add film');
+        }
+
+        const newMovie=await res.json();
+
+        let movies=JSON.parse(localStorage.getItem("films"));
+        movies.push(newMovie);
+        localStorage.setItem("films", JSON.stringify(movies));
+
+        LoadFilms();
+    }
+    catch(err){
+        console.log(err);
+    }
+}

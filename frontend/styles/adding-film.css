@@ -1,7 +1,57 @@
+.add-movie-headline{
+    text-align: center;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 40px ;
+    font-weight: bold;
+    color: white;
+}
 .movie-adding-container{
+    background-color: wheat;
     display: flex;
-    background-color: white;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 50px;
+    width: 70%;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
+.genres{
+    margin-top: -20px;
+}
+#add-movie-form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; ;
+    width: 100%; 
+    max-width: 400px; 
+}
+#add-movie-form input{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    max-width: 100%;
+}
+textarea {
+    resize: none; 
+    height: 10vh;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.movie-adding-container button{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: #f0c14b;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+.movie-adding-container button:hover{
+    background-color: #ddb347;
+    cursor: pointer;
 }

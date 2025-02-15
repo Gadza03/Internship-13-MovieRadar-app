@@ -19,8 +19,6 @@ tabs.forEach((tab) => {
 
 const params = new URLSearchParams(window.location.search);
 const movieId = params.get("id");
-console.log(movieId);
-console.log("Movie ID:", movieId);
 
 let movieInfo;
 
@@ -42,8 +40,7 @@ async function fetchMovie(id) {
 
 const infoDetails = document.querySelector(".info-details");
 const ratingsContainer = document.getElementById("ratings");
-console.log(movieInfo);
-console.log(movieInfo.reviews);
+
 function displayMovieData() {
   infoDetails.innerHTML = `
     <h2 class="title">${movieInfo.title}</h2>
@@ -60,9 +57,7 @@ function displayMovieData() {
   ratingsContainer.innerHTML = "";
   (async () => {
     for (const rating of movieInfo.ratings) {
-      console.log(rating.userId);
       let userById = await fetchUserById(rating.userId);
-      console.log(userById);
 
       ratingsContainer.innerHTML += `
         <div class="rating-info">

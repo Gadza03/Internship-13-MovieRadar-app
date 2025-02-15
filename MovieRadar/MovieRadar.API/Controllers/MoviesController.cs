@@ -18,7 +18,16 @@ namespace MovieRadar.API.Controllers
             return Ok(movies);  
         }
 
-        [HttpPost("create")]
+
+        [HttpGet("id")]
+        public async Task<IActionResult> GetMovieById(int id)
+        {
+            var movie = await _movieRepository.GetMovieById(id);
+            return Ok(movie);
+        }
+
+
+        [HttpPost]
         public async Task<IActionResult> AddMovie([FromBody] Movie movie)
         {
             if (movie == null)
@@ -38,6 +47,45 @@ namespace MovieRadar.API.Controllers
             };
 
             await _movieRepository.CreateMovie(newMovie);
+            return Ok();
+        }
+
+
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateMovie(int id, [FromBody] Movie movie)
+        {
+            if (movie == null)
+            {
+                return BadRequest("Movie data is invalid.");
+            }
+            var movieToUpdate = await _movieRepository.GetMovieById(id);
+            if (movieToUpdate == null)
+            {
+                return NotFound("Movie not found.");
+            }
+            movieToUpdate.Title = movie.Title;
+            movieToUpdate.Description = movie.Description;
+            movieToUpdate.GenreId = movie.GenreId;
+            movieToUpdate.ReleaseYear = movie.ReleaseYear;
+            movieToUpdate.AverageRating = movie.AverageRating;
+            movieToUpdate.ImageUrl = movie.ImageUrl;
+            movieToUpdate.UpdatedAt = DateTime.Now;
+            await _movieRepository.UpdateMovie(id, movieToUpdate);
+            return Ok();
+        }
+
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMovie(int id)
+        {
+            var movie = await _movieRepository.GetMovieById(id);
+            if (movie == null)
+            {
+                return NotFound("Movie not found.");
+            }
+            await _movieRepository.DeleteMovie(id);
             return Ok();
         }
 

@@ -135,7 +135,7 @@ export async function logout() {
 
 export async function AddFilm(film){
     try{
-        const res = await fetch(`${API_BASE_URL}/movies/create`, {
+        const res = await fetch(`${API_BASE_URL}/movies`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

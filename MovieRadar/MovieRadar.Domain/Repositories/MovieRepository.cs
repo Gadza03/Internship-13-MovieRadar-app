@@ -24,5 +24,16 @@ namespace MovieRadar.Domain.Repositories
 
             }
         }
+
+        public async Task CreateMovie(Movie movie)
+        {
+            var sql = "INSERT INTO movies (title, description, genreid, releaseyear, averagerating, imageurl, createdat, updatedat) VALUES (@Title, @Description, @GenreId, @ReleaseYear, @AverageRating, @ImageUrl, @CreatedAt, @UpdatedAt)";
+            using (var connection = _dbConnection.CreateConnection())
+            {
+                await connection.ExecuteAsync(sql, movie);
+            }
+        }
+
+
     }
 }

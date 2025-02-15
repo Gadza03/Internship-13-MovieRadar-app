@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using MovieRadar.Data.Entities.Models;
 using MovieRadar.Domain.Interfaces;
 
 namespace MovieRadar.API.Controllers
@@ -16,6 +16,25 @@ namespace MovieRadar.API.Controllers
         {
             var movies = await _movieRepository.GetAllFilms();
             return Ok(movies);  
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMovie([FromBody] Movie movie)
+        {
+            var newMovie =new Movie
+            {
+                Title = movie.Title,
+                Description = movie.Description,
+                GenreId = movie.GenreId,
+                ReleaseYear = movie.ReleaseYear,
+                AverageRating = movie.AverageRating,
+                ImageUrl = movie.ImageUrl,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+
+            await _movieRepository.CreateMovie(newMovie);
+            return Ok();
         }
 
     }

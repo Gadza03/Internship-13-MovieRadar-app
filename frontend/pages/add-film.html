@@ -9,7 +9,61 @@
     <title>Movie Radar</title>
   </head>
   <body>
-    <p>dodaj</p>
+
+    <div class="movie-adding-container">
+      <h1>Add a new movie</h1>
+      <form id="add-movie-form">
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Title"
+          required
+        />
+        <input
+          type="text"
+          id="director"
+          name="director"
+          placeholder="Director"
+          required
+        />
+        <input
+          type="text"
+          id="genre"
+          name="genre"
+          placeholder="Genre"
+          required
+        />
+        <input
+          type="text"
+          id="year"
+          name="year"
+          placeholder="Year"
+          required
+        />
+        <input
+          type="text"
+          id="poster"
+          name="poster"
+          placeholder="Poster URL"
+          required
+        />
+        <input
+          type="text"
+          id="trailer"
+          name="trailer"
+          placeholder="Trailer URL"
+          required
+        />
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Description"
+          required
+        ></textarea>
+        <button type="submit">Add movie</button>
+      </form>
+    </div>
 
     
     <script src="../modules/main.js" type="module"></script>

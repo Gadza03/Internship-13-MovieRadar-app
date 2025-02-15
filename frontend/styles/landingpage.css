@@ -15,7 +15,6 @@ body{
     padding-top: 20px;
 }
 .landing-page-text p {
-    margin-top: 20px;
     font-size: 24px;
     color: white;
     text-align: center;
@@ -154,5 +153,24 @@ body{
     margin-top: 20px;
 }
 
+nav{
+    overflow: hidden;
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-right: 20px;
+
+}
+nav button{ 
+    color: white;
+    background-color: #45a049;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 10px;
+}
+nav button:hover{
+    background-color: #4CAF50;
+    cursor: pointer;
+}
 
 /* Crvena boja je dodana kako bi se lakše uočilo da je stil primijenjen na stranicu */

@@ -12,21 +12,24 @@
   
     <!--Landing Page-->
     <div class="landing-page-wrapper">
+      <nav>
+        <button class="hidden" id="show-users">Show all users</button>
+        <button>Log out</button>
+      </nav>
         <header class="landing-page-text">
-            <h1>Dobrodošli u Movie Radar</h1>
+            <h1>Welcome to Movie Radar</h1>
             <p>
-                Stranica za sve potrebne filmske informacije na 
-                jednome mjestu.
+               Website for all film lovers. One place for all the info.
             </p>
         </header>
         <div class="admin-functions hidden"></div>
 
         <div class="landing-page-filter">
-            <span>Sortiraj</span>
+            <span>Sort</span>
             <select id="select-filter">
-                <option value="Default">Nema filtera</option>
-                <option value="Title">Žanr</option>
-                <option value="Year">Godina</option>
+                <option value="Default">Default</option>
+                <option value="Title">Genre</option>
+                <option value="Year">Release Year</option>
                 <option value="Genre">Rating</option>
             </select>
         </div>

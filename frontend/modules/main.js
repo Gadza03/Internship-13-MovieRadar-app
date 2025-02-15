@@ -49,6 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      //iznekog razloga se logira makar bili kiriv credentials
+
       getUserByEmail(email);
       LoadFilms();
     });

@@ -34,7 +34,7 @@ function displayFilms(){
         let filmGenre = document.createElement('p');
         for (let i = 0; i < genres.length; i++) {
             if (genres[i].id === film.genreId) {
-            filmGenre.innerHTML = `Zanr: ${genres[i].name}`;
+            filmGenre.innerHTML = `Genre: ${genres[i].name}`;
             filmGenre.classList.add('hidden-text');
             break;
             }
@@ -69,6 +69,9 @@ function displayAdminButtons(){
     let user = JSON.parse(localStorage.getItem("user")) || {};
     
     if(user.isAdmin){
+        const getAllUsers=document.getElementById('show-users');
+        getAllUsers.classList.remove('hidden');
+
         const adminPanel = document.querySelector('.admin-functions');
         adminPanel.classList.remove('hidden');
 

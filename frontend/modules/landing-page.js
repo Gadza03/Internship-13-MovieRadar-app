@@ -58,8 +58,7 @@ function displayFilms(){
         adminFuncttionContainer.classList.add('.hidden');
         const editFilmButton = document.createElement('button');
         editFilmButton.innerHTML = 'Edit Movie';
-        editFilmButton.classList.add('admin-button');
-        editFilmButton.classList.add('hidden');
+        editFilmButton.classList.add('admin-button','hidden');
         editFilmButton.id='edit-film-button';
         editFilmButton.addEventListener('click', () => {
             event.stopPropagation(); 
@@ -69,8 +68,7 @@ function displayFilms(){
 
         const deleteFilmButton =document.createElement('button', 'Izbrisi film');
         deleteFilmButton.innerHTML = 'Delete Movie';
-        deleteFilmButton.classList.add('admin-button');
-        deleteFilmButton.classList.add('hidden');
+        deleteFilmButton.classList.add('admin-button','hidden');
         deleteFilmButton.id='delete-film-button';
         deleteFilmButton.addEventListener('click', () => {
             event.stopPropagation(); 

@@ -3,6 +3,8 @@ import { AddFilm,UpdateFilm,RemoveFilm } from "./api.js";
 export function CreateFilm(event){
     event.preventDefault();
 
+    let films = JSON.parse(localStorage.getItem("films")) || [];
+
     let inputedTitle = document.getElementById("title").value.trim();
     if(isFinite(inputedTitle) && !isNaN(parseFloat(inputedTitle))){
         alert("Title cant be all numbers!");
@@ -14,6 +16,13 @@ export function CreateFilm(event){
         alert("Description cant be all numbers!");
         return;
     }
+    for(let i=0;i<films.length;i++){
+        if(films[i].title===inputedTitle && films[i].description===inputedDescription){
+            alert("Movie already exists!");
+            return;
+        }
+    }
+
 
     let inputedGenre = document.getElementById("genre").value.trim();
     let checkGenre=false;
@@ -41,6 +50,7 @@ export function CreateFilm(event){
         return;
     }
 
+    let inputedPoster = document.getElementById("poster").value.trim();
     if(inputedTitle==="" || inputedDescription==="" || inputedGenre==="" || inputedReleaseYear==="" || inputedPoster===""){
         alert("All fields must be filled!");
         return;
@@ -172,6 +182,7 @@ export function DeleteFilm(){
     if (!userAnswer) {
         return;
     }
+
     RemoveFilm(selectedFilm.id);
 }
 

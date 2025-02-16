@@ -146,7 +146,7 @@ export async function AddFilm(film){
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(film.id,film)
+            body: JSON.stringify(film)
         });
 
         if(!res.ok){
@@ -159,7 +159,7 @@ export async function AddFilm(film){
         let movies=JSON.parse(localStorage.getItem("films"));
         movies.push(newMovie);
         localStorage.setItem("films", JSON.stringify(movies));
-        //dodaj potvrdu da je dodan film
+        alert(`Film ${newMovie.title} added successfully`);
 
         LoadFilms(1);
     }
@@ -190,8 +190,9 @@ export async function UpdateFilm(film){
           movies[index] = updatedMovie;
         }
         localStorage.setItem("films", JSON.stringify(movies));
-        ///dodaj samo potvtdu da je updatean film
-        LoadFilms(1);
+        alert(`Film ${updatedMovie.title} updated successfully`);
+       
+          LoadFilms(1);
     }
     catch(err){
         console.log(err);
@@ -214,8 +215,9 @@ export async function RemoveFilm(filmId){
         let movies=JSON.parse(localStorage.getItem("films"));
         movies=movies.filter(film => film.id !== filmId);
         localStorage.setItem("films", JSON.stringify(movies));
-
-        LoadFilms(1);
+        alert(`Film deleted successfully`);
+        
+          LoadFilms(1);
     }
     catch(err){
         console.log(err);

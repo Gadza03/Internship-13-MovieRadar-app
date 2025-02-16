@@ -11,16 +11,19 @@ builder.Services.AddSingleton<DbConnectionFactory>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+
 
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
-        policy => policy.WithOrigins("http://127.0.0.1:5501")// mislin da je odi posto svak ima valjda svoju adresu se minja, jedino mozda stavi allow any origin
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials());
+        policy => policy.WithOrigins("http://127.0.0.1:5500", "http://127.0.0.1:5501")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials());
 });
 
 builder.Services.AddEndpointsApiExplorer();

@@ -113,21 +113,140 @@ export async function getUsers() {
 }
 
 export async function getUserByEmail(email) {
-    const response = await fetch(`${API_BASE_URL}/users/${email}`, {
-        method: "GET",
-        credentials: "include",
-    });
-    
-    if (!response.ok) {
-        throw new Error("Unauthorized access");
-    }
-    
-    let user = await response.json();
-    localStorage.setItem("user", JSON.stringify(user));
+  const response = await fetch(`${API_BASE_URL}/users/${email}`, {
+    method: "GET",
+    credentials: "include",
+  });
 
+  if (!response.ok) {
+    throw new Error("Unauthorized access");
+  }
+
+  let user = await response.json();
+  localStorage.setItem("user", JSON.stringify(user));
 }
 
-//Logout for later
+export async function getUserById(id) {
+  const response = await fetch(`${API_BASE_URL}/users/id/${id}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Unauthorized access");
+  }
+
+  return await response.json();
+}
+
+//movie single page
+export async function getMovieById(id) {
+  const response = await fetch(`${API_BASE_URL}/movies/${id}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Unauthorized access");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function postRating(userId, movieId, ratingValue) {
+  const response = await fetch(`${API_BASE_URL}/ratings`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId, movieId, ratingValue }),
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function checkUserRating(userId, movieId) {
+  const response = await fetch(`${API_BASE_URL}/ratings/${userId}/${movieId}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+  return await response.json();
+}
+
+export async function deleteRating(userId, movieId) {
+  const response = await fetch(`${API_BASE_URL}/ratings/${userId}/${movieId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete rating");
+  }
+  return await response.json();
+}
+
+export async function checkUserReview(userId, movieId) {
+  const response = await fetch(`${API_BASE_URL}/reviews/${userId}/${movieId}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+  return await response.json();
+}
+
+export async function postReview(userId, movieId, content) {
+  const response = await fetch(`${API_BASE_URL}/reviews`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId, movieId, content }),
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function deleteReview(userId, movieId) {
+  const response = await fetch(`${API_BASE_URL}/reviews/${userId}/${movieId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete rating");
+  }
+  return await response.json();
+}
+
 export async function logout() {
   await fetch(`${API_BASE_URL}/auth/logout`, {
     method: "POST",

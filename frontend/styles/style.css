@@ -4,6 +4,8 @@
 @import url("./landingpage.css");
 @import url("./adding-film.css");
 
+@import "./single-film.css";
+
 :root {
   --blue-color: blue;
   --blue-color-hover: rgba(34, 34, 247, 0.851);

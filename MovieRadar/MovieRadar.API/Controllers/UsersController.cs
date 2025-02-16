@@ -15,6 +15,17 @@ namespace MovieRadar.API.Controllers
         public UsersController(IUserRepository userRepository) => _userRepository = userRepository;
 
 
+        [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var user = await _userRepository.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetUsers()

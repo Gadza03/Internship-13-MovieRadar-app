@@ -9,6 +9,7 @@ namespace MovieRadar.Domain.Interfaces
         public Task<User> GetUserByEmail(string email);
 
         public Task CreateUser(User user);
+        public Task<User> GetUserById(int id);
 
     }
 }

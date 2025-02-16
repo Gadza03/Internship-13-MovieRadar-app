@@ -28,6 +28,7 @@ namespace MovieRadar.API.Controllers
         }
 
 
+
         [HttpGet("id")]
         public async Task<IActionResult> GetMovieById(int id)
         {
@@ -223,6 +224,21 @@ namespace MovieRadar.API.Controllers
             return BadRequest("Movie doesn't exist.");
 
 
+        }
+
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetMovieInfo(int id)
+        {
+            var movie = await _movieRepository.GetSingleMovieInfo(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(movie);
         }
 
     }

@@ -1,54 +1,61 @@
+
 body{
    background-color: lightcoral;
 }
-.landing-page-wrapper{
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    gap: 30px;
+.landing-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 .landing-page-text h1 {
-    font-size: 48px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-    padding-top: 20px;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  padding-top: 20px;
 }
 .landing-page-text p {
     font-size: 24px;
     color: white;
     text-align: center;
+
+  margin-top: 20px;
+  font-size: 24px;
+  color: white;
+  text-align: center;
+
 }
 .landing-page-filter {
-    align-self: flex-end;
-    padding: 15px 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    transform: translateX(-30px);
+  align-self: flex-end;
+  padding: 15px 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  transform: translateX(-30px);
 }
-    
+
 .landing-page-filter span {
-    font-weight: bold;
-    font-size: 16px;
-    margin-right: 15px;
-    margin-left: 15px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
-    
+
 #select-filter {
-    appearance: none; 
-    border: none; 
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none; 
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  appearance: none;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-    
+
 #select-filter option {
-    font-size: 18px;
-    padding: 10px;
+  font-size: 18px;
+  padding: 10px;
 }
 
 #select-filter {
@@ -115,43 +122,44 @@ body{
 .film-title{
     font-size: 20px;
     font-weight: bold;
-}
+  }
 
 .hidden-text {
-    display: none;
+  display: none;
 }
 
 .film-card:hover .hidden-text {
-    display: block;
+  display: block;
 }
-.film-picture-hidden{
-    display: none;
+.film-picture-hidden {
+  display: none;
 }
-.film-card:hover .film-picture{
-    align-self:center;
+.film-card:hover .film-picture {
+  align-self: center;
 }
-.admin-button{
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-top: 10px;
+.admin-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 10px;
 }
-.admin-button:hover{
-    background-color: #45a049;
-    cursor: pointer;
+.admin-button:hover {
+  background-color: #45a049;
+  cursor: pointer;
 }
-.admin-functions{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-    margin-top: 20px;
+.admin-functions {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  margin-top: 20px;
 }
+
 
 nav{
     overflow: hidden;
@@ -183,3 +191,4 @@ nav button:hover{
     font-size: 12px;
 
 }
+

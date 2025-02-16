@@ -13,6 +13,18 @@ namespace MovieRadar.Domain.Repositories
             _dbConnection = dbConnection;
         }
 
+        public async Task<User> GetUserById(int id)
+        {
+            var sql = "SELECT * FROM USERS WHERE Id = @id";
+            using (var connection = _dbConnection.CreateConnection())
+            {
+                var user = await connection.QueryFirstOrDefaultAsync<User>(sql, new { id });
+                return user;
+            }
+
+        }
+
+
         public async Task<IEnumerable<User>> GetAllUsers()
         {
             var sql = "SELECT * FROM USERS";

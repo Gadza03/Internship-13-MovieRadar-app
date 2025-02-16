@@ -1,9 +1,12 @@
-﻿using MovieRadar.Data.Entities.Models;
+﻿
+using MovieRadar.Data.Entities.Models;
 
 namespace MovieRadar.Domain.Interfaces
 {
     public interface IMovieRepository
     {
+
+        public Task<Movie> GetSingleMovieInfo(int id);
         public Task<IEnumerable<Movie>> GetAllFilms();
         public Task<Movie> GetMovieById(int id);
         public Task CreateMovie(Movie movie);

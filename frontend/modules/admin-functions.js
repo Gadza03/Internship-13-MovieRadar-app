@@ -3,6 +3,18 @@ import { AddFilm } from "./api.js";
 export function CreateFilm(event){
     event.preventDefault();
 
+    let inputedTitle = document.getElementById("title").value;
+    if(isFinite(inputedTitle) && !isNaN(parseFloat(inputedTitle))){
+        alert("Title cant be all numbers!");
+        return;
+    }
+
+    let inputedDescription = document.getElementById("description").value;
+    if(isFinite(inputedDescription) && !isNaN(parseFloat(inputedDescription))){
+        alert("Description cant be all numbers!");
+        return;
+    }
+
     let inputedGenre = document.getElementById("genre").value;
     let checkGenre=false;
     let genres = JSON.parse(localStorage.getItem("genres")) || [];
@@ -19,12 +31,22 @@ export function CreateFilm(event){
         return;
     }
 
+    let inputedReleaseYear = document.getElementById("releaseYear").value;
+    if(!isFinite(inputedReleaseYear) || isNaN(parseFloat(inputedReleaseYear))){
+        alert("Release year must be a number!");
+        return;
+    }
+    else if(parseInt(inputedReleaseYear)<1900){
+        alert("Release year must be after 1900!");
+        return;
+    }
+
     var film = {
-        title: document.getElementById("title").value,
-        description: document.getElementById("description").value,
+        title: inputedTitle,
+        description: inputedDescription,
         genreId: inputedGenre,
-        release_year: document.getElementById("releaseYear").value,
-        averageRating: 0.0,
+        ReleaseYear : parseInt(inputedReleaseYear),
+        averageRating: 0.00,
         imageURL: null, //samo skupit url s inputa za dobit sliku
         createdAt: new Date(),
         updatedAt: new Date()

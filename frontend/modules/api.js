@@ -135,6 +135,8 @@ export async function logout() {
 
 export async function AddFilm(film){
     try{
+      console.log(JSON.stringify(film));
+      
         const res = await fetch(`${API_BASE_URL}/movies`, {
             method: 'POST',
             headers: {
@@ -151,6 +153,58 @@ export async function AddFilm(film){
 
         let movies=JSON.parse(localStorage.getItem("films"));
         movies.push(newMovie);
+        localStorage.setItem("films", JSON.stringify(movies));
+
+        LoadFilms();
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+export async function UpdateFilm(film){
+    try{
+        const res = await fetch(`${API_BASE_URL}/movies/${film.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(film)
+        });
+
+        if(!res.ok){
+            throw new Error('Failed to update film');
+        }
+
+        const updatedMovie=await res.json();
+
+        let movies=JSON.parse(localStorage.getItem("films"));
+        let index = movies.findIndex(f => f.id === updatedMovie.id);
+        movies[index]=updatedMovie;
+        localStorage.setItem("films", JSON.stringify(movies));
+
+        LoadFilms();
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+export async function DeleteFilm(filmId){
+    try{
+        const res = await fetch(`${API_BASE_URL}/movies/${filmId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if(!res.ok){
+            throw new Error('Failed to delete film');
+        }
+
+        let movies=JSON.parse(localStorage.getItem("films"));
+        movies=movies.filter(film => film.id !== filmId);
         localStorage.setItem("films", JSON.stringify(movies));
 
         LoadFilms();

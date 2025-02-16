@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieRadar.Data.Entities.Models;
 using MovieRadar.Domain.Interfaces;
+using System.Text.Json;
 
 namespace MovieRadar.API.Controllers
 {
@@ -34,8 +35,10 @@ namespace MovieRadar.API.Controllers
             {
                 return BadRequest("Movie data is invalid.");
             }
-            var newMovie =new Movie
-            {   
+            Console.WriteLine($"Received release year: {movie.ReleaseYear}");
+            Console.WriteLine($"Full JSON: {JsonSerializer.Serialize(movie)}");
+            var newMovie = new Movie
+            {
                 Title = movie.Title,
                 Description = movie.Description,
                 GenreId = movie.GenreId,
@@ -45,7 +48,7 @@ namespace MovieRadar.API.Controllers
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
             };
-
+            Console.WriteLine($"New Movie -{newMovie.Id} Title: {newMovie.Title}, Description: {newMovie.Description}, GenreId: {newMovie.GenreId}, ReleaseYear: {newMovie.ReleaseYear}, AverageRating: {newMovie.AverageRating}, ImageUrl: {newMovie.ImageUrl}, CreatedAt: {newMovie.CreatedAt}, UpdatedAt: {newMovie.UpdatedAt}");
             await _movieRepository.CreateMovie(newMovie);
             return Ok();
         }

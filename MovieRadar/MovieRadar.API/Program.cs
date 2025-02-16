@@ -1,5 +1,3 @@
-
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using MovieRadar.Data;
@@ -9,11 +7,16 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddSingleton<DbConnectionFactory>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+
 
 builder.Services.AddControllers();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
@@ -22,7 +25,6 @@ builder.Services.AddCors(options =>
                         .AllowAnyMethod()
                         .AllowCredentials());
 });
-
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -38,7 +40,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-
     };
 
     options.Events = new JwtBearerEvents
@@ -46,17 +47,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         OnMessageReceived = ctx =>
         {
             ctx.Request.Cookies.TryGetValue("accessToken", out var accesToken);
-            if (!string.IsNullOrEmpty(accesToken)) 
+            if (!string.IsNullOrEmpty(accesToken))
                 ctx.Token = accesToken;
 
             return Task.CompletedTask;
         }
-    }; 
+    };
 });
 
-
-
 var app = builder.Build();
+
+app.UseCors("AllowFrontend");
 
 if (app.Environment.IsDevelopment())
 {
@@ -65,7 +66,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();

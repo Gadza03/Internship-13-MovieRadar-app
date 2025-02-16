@@ -1,6 +1,9 @@
 @import url("./fonts.css");
 
 @import url("./login-register.css");
+@import url("./landingpage.css");
+
+@import "./single-film.css";
 
 :root {
   --blue-color: blue;

@@ -7,7 +7,6 @@ namespace MovieRadar.Domain.Interfaces
     {
 
         public Task<Movie> GetSingleMovieInfo(int id);
-        public Task<string> GetGenreNameById(int id);
         public Task<IEnumerable<Movie>> GetAllFilms();
         
     }

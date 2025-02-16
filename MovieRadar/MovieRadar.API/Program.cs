@@ -11,6 +11,7 @@ builder.Services.AddSingleton<DbConnectionFactory>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 
 builder.Services.AddControllers();
 

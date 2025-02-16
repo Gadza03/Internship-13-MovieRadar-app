@@ -11,7 +11,13 @@ namespace MovieRadar.Domain.Repositories
 
         private readonly DbConnectionFactory _dbConnection;
 
-        public MovieRepository(DbConnectionFactory dbConnection) => _dbConnection = dbConnection;
+        private readonly IGenreRepository _genreRepository;
+
+        public MovieRepository(DbConnectionFactory dbConnection, IGenreRepository genreRepository) {
+            _dbConnection = dbConnection;
+            _genreRepository = genreRepository;
+
+        } 
         public async Task<Movie> GetSingleMovieInfo(int id)
         {
             var query = @"
@@ -34,7 +40,7 @@ namespace MovieRadar.Domain.Repositories
                     var ratings = (await multi.ReadAsync<Rating>()).ToList();
                     movie.Ratings = ratings;
 
-                    var genreName = await GetGenreNameById(movie.GenreId);
+                    var genreName = await _genreRepository.GetGenreNameById(movie.GenreId);
                     movie.GenreName = genreName;
 
                     var reviews = (await multi.ReadAsync<Review>()).ToList();
@@ -54,15 +60,7 @@ namespace MovieRadar.Domain.Repositories
             }
         }
 
-        public async Task<string> GetGenreNameById(int id)
-        {
-            var query = "SELECT name FROM GENRES WHERE Id = @id";
-            using (var connection = _dbConnection.CreateConnection())
-            {
-                var genre = await connection.QueryFirstOrDefaultAsync<string>(query, new { id });
-                return genre;
-            }
-        }
+  
 
         public async Task<IEnumerable<Movie>> GetAllFilms()
         {

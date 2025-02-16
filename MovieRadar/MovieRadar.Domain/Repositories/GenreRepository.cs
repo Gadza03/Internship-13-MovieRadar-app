@@ -2,11 +2,6 @@
 using MovieRadar.Data;
 using MovieRadar.Data.Entities.Models;
 using MovieRadar.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieRadar.Domain.Repositories
 {
@@ -16,6 +11,16 @@ namespace MovieRadar.Domain.Repositories
         public GenreRepository(DbConnectionFactory dbConnection)
         {
             _dbConnection = dbConnection;
+        }
+
+        public async Task<string> GetGenreNameById(int id)
+        {
+            var query = "SELECT name FROM GENRES WHERE Id = @id";
+            using (var connection = _dbConnection.CreateConnection())
+            {
+                var genre = await connection.QueryFirstOrDefaultAsync<string>(query, new { id });
+                return genre;
+            }
         }
         public async Task<IEnumerable<Genre>> GetAllGenres()
         {

@@ -62,7 +62,7 @@ export function CreateFilm(event){
         genreId: inputedGenre,
         ReleaseYear : parseInt(inputedReleaseYear),
         averageRating: 0.00,
-        imageURL: null, //samo skupit url s inputa za dobit sliku
+        imageURL: null, 
         createdAt: new Date(),
         updatedAt: new Date()
     };
@@ -202,5 +202,5 @@ export function FillExisitngFilms(){
     document.getElementById("existing-description").value = selectedFilm.description;
     document.getElementById("existing-genre").value = genreName;
     document.getElementById("existing-releaseYear").value = selectedFilm.releaseYear;
-    document.getElementById("existing-poster").value = selectedFilm.imageURL;
+    document.getElementById("existing-poster").value = "";
 }

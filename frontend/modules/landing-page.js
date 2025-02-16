@@ -28,10 +28,6 @@ function displayFilms(){
         let filmDescription = document.createElement('p');
         filmDescription.innerHTML = film.description;
 
-        // Rating
-        let filmRating = document.createElement('p');
-        filmRating.innerHTML = `Rating: ${film.averageRating}`;
-
         // Genre
         let filmGenre = document.createElement('p');
         for (let i = 0; i < genres.length; i++) {
@@ -49,7 +45,6 @@ function displayFilms(){
 
         //Picture 
         let filmPicture = document.createElement('img');
-        //filmPicture.src = film.imageUrl;
         filmPicture.src = '../assets/images/interstellar-movie.jpg';
         filmPicture.classList.add('film-picture-hidden');
 
@@ -61,7 +56,6 @@ function displayFilms(){
         editFilmButton.classList.add('admin-button','hidden');
         editFilmButton.id='edit-film-button';
         editFilmButton.addEventListener('click', () => {
-            event.stopPropagation(); 
             localStorage.setItem("selectedFilm", JSON.stringify(film));
             window.location.href='./edit-film.html';
         });
@@ -71,16 +65,14 @@ function displayFilms(){
         deleteFilmButton.classList.add('admin-button','hidden');
         deleteFilmButton.id='delete-film-button';
         deleteFilmButton.addEventListener('click', () => {
-            event.stopPropagation(); 
             localStorage.setItem("selectedFilmToDelete", JSON.stringify(film));
-            DeleteFilm();//triba na hover dobit id filma
+            DeleteFilm();
         });
         
 
         // Append elements
         filmCard.appendChild(filmTitle);
         filmCard.appendChild(filmDescription);
-        filmCard.appendChild(filmRating);
         filmCard.appendChild(filmGenre);
         filmCard.appendChild(filmYear);
         filmCard.appendChild(filmPicture);

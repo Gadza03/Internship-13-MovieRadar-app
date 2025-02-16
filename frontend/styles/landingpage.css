@@ -1,5 +1,5 @@
 body{
-    background-color: red;
+   background-color: lightcoral;
 }
 .landing-page-wrapper{
     display: flex;
@@ -101,7 +101,7 @@ body{
     max-height: 10%;
     border-radius: 10%;
     transform: translateX(-400px);
-    margin-top: -120px;  /*teze hardkodiranje, al ako ima neko ideju nek proba stavit sliku s live strane teskta*/
+    margin-top: -100px;  
 }
 .film-card p{
     max-width: 50%;
@@ -183,4 +183,3 @@ nav button:hover{
     font-size: 12px;
 
 }
-/* Crvena boja je dodana kako bi se lakše uočilo da je stil primijenjen na stranicu */

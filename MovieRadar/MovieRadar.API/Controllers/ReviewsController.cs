@@ -65,14 +65,14 @@ namespace MovieRadar.API.Controllers
         [Authorize]
         public async Task<IActionResult> GetUserReview(int userId, int movieId)
         {
-            var existingRating = await _reviewRepository.ReviewByUserAndMovie(userId, movieId);
+            var existingReview = await _reviewRepository.ReviewByUserAndMovie(userId, movieId);
 
-            if (existingRating == null)
+            if (existingReview == null)
             {
                 return NotFound();
             }
 
-            return Ok(existingRating);
+            return Ok(existingReview);
         }
 
 
@@ -80,14 +80,14 @@ namespace MovieRadar.API.Controllers
         [HttpDelete("{userId}/{movieId}")]
         public async Task<IActionResult> DeleteReview(int userId, int movieId)
         {
-            var rating = await _reviewRepository.ReviewByUserAndMovie(userId, movieId);
-            if (rating == null)
+            var review = await _reviewRepository.ReviewByUserAndMovie(userId, movieId);
+            if (review == null)
             {
-                return NotFound("Rating not found.");
+                return NotFound("Review not found.");
             }
 
             await _reviewRepository.Delete(userId, movieId);
-            return Ok(new { message = "Rating deleted successfully!" });
+            return Ok(new { message = "Review deleted successfully!" });
         }
     }
 }

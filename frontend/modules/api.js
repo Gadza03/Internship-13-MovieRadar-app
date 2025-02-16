@@ -55,10 +55,10 @@ export async function loginUser(email, password) {
     } else {
       alert(responseData.message || "Login failed. Try again later.");
     }
-    return { success: false, data: null };
+    return false;
   }
 
-  return { success: true, data: responseData };
+  return true;
 }
 
 export async function registerUser(firstName, lastName, email, password) {
@@ -81,10 +81,10 @@ export async function registerUser(firstName, lastName, email, password) {
     } else {
       alert(responseData.message || "Registration failed. Try again later.");
     }
-    return { success: false, data: null };
+    return false;
   }
 
-  return { success: true, data: responseData };
+  return true;
 }
 
 export async function getUsers() {
@@ -241,7 +241,6 @@ export async function deleteReview(userId, movieId) {
   return await response.json();
 }
 
-//Logout for later
 export async function logout() {
   await fetch(`${API_BASE_URL}/auth/logout`, {
     method: "POST",

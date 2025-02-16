@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       getUserByEmail(email);
-      LoadFilms();
+      LoadFilms(0);
     });
   }
 
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       getUserByEmail(email);
-      LoadFilms();
+      LoadFilms(0);
     });
   }
 

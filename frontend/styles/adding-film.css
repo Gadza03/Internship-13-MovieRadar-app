@@ -1,0 +1,120 @@
+.add-movie-headline{
+    text-align: center;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 40px ;
+    font-weight: bold;
+    color: white;
+}
+.movie-adding-container{
+    background-color: wheat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    width: 70%;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
+.genres{
+    margin-top: -20px;
+}
+.movie-form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; ;
+    width: 100%; 
+    max-width: 400px; 
+}
+.movie-form input{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    max-width: 100%;
+}
+textarea {
+    resize: none; 
+    height: 10vh;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.movie-adding-container button{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: #f0c14b;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+.movie-adding-container button:hover{
+    background-color: #ddb347;
+    cursor: pointer;
+}
+
+.movie-editing-container{
+    background-color: wheat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    width: 40%;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+.movie-editing-container button{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: #f0c14b;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+.movie-editing-container button:hover{
+    background-color: #ddb347;
+    cursor: pointer;
+}
+
+.existing-movie-container{
+    background-color: wheat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    width: 40%;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+.movie-headline{
+    margin-top: -20px;
+    font-weight: bold;
+}
+.container form{
+    margin-top: 20px;
+}
+
+.existing-movie-container input{
+    margin-top: -30px;
+}
+.existing-movie-container textarea{
+    margin-top: -30px;
+}

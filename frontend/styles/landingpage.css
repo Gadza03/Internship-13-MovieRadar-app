@@ -1,5 +1,6 @@
-body {
-  background-color: red;
+
+body{
+   background-color: lightcoral;
 }
 .landing-page-wrapper {
   display: flex;
@@ -15,10 +16,15 @@ body {
   padding-top: 20px;
 }
 .landing-page-text p {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+
   margin-top: 20px;
   font-size: 24px;
   color: white;
   text-align: center;
+
 }
 .landing-page-filter {
   align-self: flex-end;
@@ -53,72 +59,70 @@ body {
 }
 
 #select-filter {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='black'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 18px;
-  padding-right: 30px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='black'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+    padding-right: 30px;
 }
-.movies-div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 10px;
+.movies-div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
 }
-.landing-page-movies {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  gap: 40px;
-  width: 80%;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-left: 40px;
+.landing-page-movies{
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    gap: 40px;
+    width: 80%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-left:40px;
 }
-.film-card {
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.4s ease;
+.film-card{
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    font-size: 15px;
 }
-.film-card:hover {
-  transform: scale(1.3);
-  padding: 30px;
-  align-items: center;
-  text-align: center;
-  width: 80%;
-  margin: auto;
-  line-height: 2;
+.film-card:hover{
+    transform: scale(1.3); 
+    padding: 30px; 
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    line-height: 2;
 }
-.film-card:hover .film-picture-hidden {
-  display: flex;
-  max-width: 15%;
-  max-height: 10%;
-  border-radius: 10%;
-  transform: translateX(-400px);
-  margin-top: -120px; /*teze hardkodiranje, al ako ima neko ideju nek proba stavit sliku s live strane teskta*/
+.film-card:hover .film-picture-hidden{
+    display: flex; 
+    max-width: 15%;
+    max-height: 10%;
+    border-radius: 10%;
+    transform: translateX(-400px);
+    margin-top: -100px;  
 }
-.film-card p {
-  max-width: 50%;
+.film-card p{
+    max-width: 50%;
 }
-.film-card:hover p {
-  font-size: 11px;
+.film-card:hover p{
+    font-size: 11px;
 }
-.film-card:hover .film-title {
-  font-size: 18px;
+.film-card:hover .film-title{
+    font-size: 18px;
 }
-.film-title {
-  font-size: 20px;
-  font-weight: bold;
-}
+.film-title{
+    font-size: 20px;
+    font-weight: bold;
+  }
 
 .hidden-text {
   display: none;
@@ -156,4 +160,35 @@ body {
   margin-top: 20px;
 }
 
-/* Crvena boja je dodana kako bi se lakše uočilo da je stil primijenjen na stranicu */
+
+nav{
+    overflow: hidden;
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-right: 20px;
+
+}
+nav button{ 
+    color: white;
+    background-color: #45a049;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 10px;
+}
+nav button:hover{
+    background-color: #4CAF50;
+    cursor: pointer;
+}
+.admin-functions-container{
+   margin-top: -50px;
+   display: flex;
+   gap: 20px;
+}
+
+.film-card .admin-button{
+    margin-top: 0;
+    font-size: 12px;
+
+}
+

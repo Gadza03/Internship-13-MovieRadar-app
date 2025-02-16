@@ -1,38 +1,44 @@
 const API_BASE_URL = "https://localhost:7092/api";
 
-export async function LoadFilms() {
-  try {
-    const res = await fetch(`${API_BASE_URL}/movies`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+export async function LoadFilms(num){    
+    try{
+        const res = await fetch(`${API_BASE_URL}/movies`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
 
-    const genreRes = await fetch(`${API_BASE_URL}/genres`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+        const genreRes = await fetch(`${API_BASE_URL}/genres`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
 
-    if (!res.ok) {
-      throw new Error("Failed to load films");
+        if(!res.ok){
+            throw new Error('Failed to load films');
+        }
+        if(!genreRes.ok){
+            throw new Error('Failed to load genres');
+        }
+
+        const films=await res.json();
+        const genres=await genreRes.json();
+
+        localStorage.setItem("films", JSON.stringify(films));
+        localStorage.setItem("genres", JSON.stringify(genres));
+
+        if(num===0){
+            window.location.replace('./pages/landing.html');
+        }
+        else{
+            window.location.replace('./landing.html');
+        }
     }
-    if (!genreRes.ok) {
-      throw new Error("Failed to load genres");
+    catch(err){
+        console.log(err);
     }
-
-    const films = await res.json();
-    const genres = await genreRes.json();
-
-    localStorage.setItem("films", JSON.stringify(films));
-    localStorage.setItem("genres", JSON.stringify(genres));
-
-    window.location.href = "./pages/landing.html";
-  } catch (err) {
-    console.log(err);
-  }
 }
 
 export async function loginUser(email, password) {
@@ -247,5 +253,92 @@ export async function logout() {
     credentials: "include",
   });
 
-  window.location.href = "../index.html";
+  window.location.replace("../index.html");
+  //window.location.href = "../index.html";
+  initializeLoginRegister();
+}
+
+export async function AddFilm(film){
+    try{
+        const res = await fetch(`${API_BASE_URL}/movies`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(film)
+        });
+
+        if(!res.ok){
+            throw new Error('Failed to add film');
+        } 
+        
+        const newMovie=await res.json();
+
+
+        let movies=JSON.parse(localStorage.getItem("films"));
+        movies.push(newMovie);
+        localStorage.setItem("films", JSON.stringify(movies));
+        alert(`Film ${newMovie.title} added successfully`);
+
+        LoadFilms(1);
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+export async function UpdateFilm(film){
+    try{
+        const res = await fetch(`${API_BASE_URL}/movies/${film.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(film)
+        });
+
+        if(!res.ok){
+            throw new Error('Failed to update film');
+        }
+
+        const updatedMovie=await res.json();
+
+        let movies=JSON.parse(localStorage.getItem("films"));
+        let index = movies.findIndex(f => f.id === updatedMovie.id);
+        if (index !== -1) {
+          movies[index] = updatedMovie;
+        }
+        localStorage.setItem("films", JSON.stringify(movies));
+        alert(`Film ${updatedMovie.title} updated successfully`);
+       
+          LoadFilms(1);
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+export async function RemoveFilm(filmId){
+    try{
+        const res = await fetch(`${API_BASE_URL}/movies/${filmId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if(!res.ok){
+            throw new Error('Failed to delete film');
+        }
+
+        let movies=JSON.parse(localStorage.getItem("films"));
+        movies=movies.filter(film => film.id !== filmId);
+        localStorage.setItem("films", JSON.stringify(movies));
+        alert(`Film deleted successfully`);
+        
+          LoadFilms(1);
+    }
+    catch(err){
+        console.log(err);
+    }
 }

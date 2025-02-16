@@ -1,4 +1,4 @@
-import { RemoveFilm } from "./api.js";
+import { DeleteFilm } from "./admin-functions.js";
 
 export function Show(){
     document.addEventListener("DOMContentLoaded", function () {
@@ -74,7 +74,7 @@ function displayFilms(){
         deleteFilmButton.id='delete-film-button';
         deleteFilmButton.addEventListener('click', () => {
             event.stopPropagation(); 
-            localStorage.setItem("selectedFilm", JSON.stringify(film));
+            localStorage.setItem("selectedFilmToDelete", JSON.stringify(film));
             DeleteFilm();//triba na hover dobit id filma
         });
         

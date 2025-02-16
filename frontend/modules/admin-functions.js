@@ -167,7 +167,12 @@ export function EditFilm(event){
 }
 
 export function DeleteFilm(){
-
+    let selectedFilm = JSON.parse(localStorage.getItem("selectedFilmToDelete"));
+    const userAnswer = confirm(`Are you sure you want to delete ${selectedFilm.title}?`);
+    if (!userAnswer) {
+        return;
+    }
+    RemoveFilm(selectedFilm.id);
 }
 
 export function FillExisitngFilms(){

@@ -1,176 +1,175 @@
-body{
-    background-color: red;
+body {
+  background-color: gray;
 }
-.landing-page-wrapper{
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    gap: 30px;
+.landing-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 .landing-page-text h1 {
-    font-size: 48px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-    padding-top: 20px;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  padding-top: 20px;
 }
 .landing-page-text p {
-    font-size: 24px;
-    color: white;
-    text-align: center;
+  font-size: 24px;
+  color: white;
+  text-align: center;
 }
 .landing-page-filter {
-    align-self: flex-end;
-    padding: 15px 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    transform: translateX(-30px);
+  align-self: flex-end;
+  padding: 15px 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  transform: translateX(-30px);
 }
-    
+
 .landing-page-filter span {
-    font-weight: bold;
-    font-size: 16px;
-    margin-right: 15px;
-    margin-left: 15px;
-}
-    
-#select-filter {
-    appearance: none; 
-    border: none; 
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none; 
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-    
-#select-filter option {
-    font-size: 18px;
-    padding: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 
 #select-filter {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='black'><path d='M7 10l5 5 5-5z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 18px;
-    padding-right: 30px;
+  appearance: none;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.movies-div{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 10px;
+
+#select-filter option {
+  font-size: 18px;
+  padding: 10px;
 }
-.landing-page-movies{
-    display: flex;
-    flex-direction: column;
-    align-self: flex-start;
-    gap: 40px;
-    width: 80%;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-left:40px;
+
+#select-filter {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='black'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+  padding-right: 30px;
 }
-.film-card{
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    font-size: 15px;
+.movies-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
 }
-.film-card:hover{
-    transform: scale(1.3); 
-    padding: 30px; 
-    align-items: center;
-    text-align: center;
-    width: 80%;
-    margin: auto;
-    line-height: 2;
+.landing-page-movies {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 40px;
+  width: 80%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-left: 40px;
 }
-.film-card:hover .film-picture-hidden{
-    display: flex; 
-    max-width: 15%;
-    max-height: 10%;
-    border-radius: 10%;
-    transform: translateX(-400px);
-    margin-top: -120px;  /*teze hardkodiranje, al ako ima neko ideju nek proba stavit sliku s live strane teskta*/
+.film-card {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  font-size: 15px;
 }
-.film-card p{
-    max-width: 50%;
+.film-card:hover {
+  transform: scale(1.3);
+  padding: 30px;
+  align-items: center;
+  text-align: center;
+  width: 80%;
+  margin: auto;
+  line-height: 2;
 }
-.film-card:hover p{
-    font-size: 11px;
+.film-card:hover .film-picture-hidden {
+  display: flex;
+  max-width: 15%;
+  max-height: 10%;
+  border-radius: 10%;
+  transform: translateX(-400px);
+  margin-top: -120px; /*teze hardkodiranje, al ako ima neko ideju nek proba stavit sliku s live strane teskta*/
 }
-.film-card:hover .film-title{
-    font-size: 18px;
+.film-card p {
+  max-width: 50%;
 }
-.film-title{
-    font-size: 20px;
-    font-weight: bold;
+.film-card:hover p {
+  font-size: 11px;
+}
+.film-card:hover .film-title {
+  font-size: 18px;
+}
+.film-title {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .hidden-text {
-    display: none;
+  display: none;
 }
 
 .film-card:hover .hidden-text {
-    display: block;
+  display: block;
 }
-.film-picture-hidden{
-    display: none;
+.film-picture-hidden {
+  display: none;
 }
-.film-card:hover .film-picture{
-    align-self:center;
+.film-card:hover .film-picture {
+  align-self: center;
 }
-.admin-button{
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-top: 10px;
+.admin-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 10px;
 }
-.admin-button:hover{
-    background-color: #45a049;
-    cursor: pointer;
+.admin-button:hover {
+  background-color: #45a049;
+  cursor: pointer;
 }
-.admin-functions{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-    margin-top: 20px;
+.admin-functions {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  margin-top: 20px;
 }
 
-nav{
-    overflow: hidden;
-    align-self: flex-end;
-    margin-top: 10px;
-    margin-right: 20px;
-
+nav {
+  overflow: hidden;
+  align-self: flex-end;
+  margin-top: 10px;
+  margin-right: 20px;
 }
-nav button{ 
-    color: white;
-    background-color: #45a049;
-    text-align: center;
-    padding: 10px;
-    font-size: 13px;
-    border-radius: 10px;
+nav button {
+  color: white;
+  background-color: #45a049;
+  text-align: center;
+  padding: 10px;
+  font-size: 13px;
+  border-radius: 10px;
 }
-nav button:hover{
-    background-color: #4CAF50;
-    cursor: pointer;
+nav button:hover {
+  background-color: #4caf50;
+  cursor: pointer;
 }
 
 /* Crvena boja je dodana kako bi se lakše uočilo da je stil primijenjen na stranicu */

@@ -34,5 +34,15 @@ namespace MovieRadar.Domain.Repositories
                  await connection.ExecuteAsync(query, review);
             }
         }
+
+        public async Task Delete(int userId, int movieId)
+        {
+            var query = "DELETE FROM Reviews WHERE userId = @userId AND movieId = @movieId";
+            using (var connection = _dbConnection.CreateConnection())
+            {
+                await connection.ExecuteAsync(query, new { userId, movieId });
+
+            }
+        }
     }
 }

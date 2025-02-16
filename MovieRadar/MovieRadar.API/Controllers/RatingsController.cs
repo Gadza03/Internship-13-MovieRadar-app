@@ -62,5 +62,33 @@ namespace MovieRadar.API.Controllers
 
 
         }
+
+        [HttpGet("{userId}/{movieId}")]
+        [Authorize]
+        public async Task<IActionResult> GetUserRating(int userId, int movieId)
+        {
+            var existingRating = await _ratingRepository.RatingByUserAndMovie(userId, movieId);
+
+            if (existingRating == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(existingRating);
+        }
+
+        [HttpDelete("{userId}/{movieId}")]
+        public async Task<IActionResult> DeleteRating(int userId, int movieId)
+        {
+            var rating = await _ratingRepository.RatingByUserAndMovie(userId, movieId);
+            if (rating == null)
+            {
+                return NotFound("Rating not found.");
+            }
+
+            await _ratingRepository.Delete(userId, movieId);
+            return Ok(new { message = "Rating deleted successfully!" });
+        }
+
     }
 }

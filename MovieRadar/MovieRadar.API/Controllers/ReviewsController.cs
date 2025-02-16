@@ -31,13 +31,11 @@ namespace MovieRadar.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            Console.WriteLine("OVde sam dosa");
             var userById = await _userRepository.GetUserById(review.UserId);
             if (userById == null)
             {
                 return NotFound("User with this id doesn't exisits.");
             }
-            Console.WriteLine(userById.Id);
 
             var movieById = await _movieRepository.GetSingleMovieInfo(review.MovieId);
             if (movieById == null)
@@ -61,6 +59,35 @@ namespace MovieRadar.API.Controllers
             await _reviewRepository.Add(newReview);
 
             return Ok(new { message = "Review added successfully!" });
+        }
+
+        [HttpGet("{userId}/{movieId}")]
+        [Authorize]
+        public async Task<IActionResult> GetUserReview(int userId, int movieId)
+        {
+            var existingRating = await _reviewRepository.ReviewByUserAndMovie(userId, movieId);
+
+            if (existingRating == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(existingRating);
+        }
+
+
+
+        [HttpDelete("{userId}/{movieId}")]
+        public async Task<IActionResult> DeleteReview(int userId, int movieId)
+        {
+            var rating = await _reviewRepository.ReviewByUserAndMovie(userId, movieId);
+            if (rating == null)
+            {
+                return NotFound("Rating not found.");
+            }
+
+            await _reviewRepository.Delete(userId, movieId);
+            return Ok(new { message = "Rating deleted successfully!" });
         }
     }
 }

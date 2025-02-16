@@ -8,5 +8,8 @@ namespace MovieRadar.Domain.Interfaces
         public Task Add(Review review);
         public Task<Review> ReviewByUserAndMovie(int userId, int movieId);
 
+        public Task Delete(int userId, int movieId);
+
+
     }
 }

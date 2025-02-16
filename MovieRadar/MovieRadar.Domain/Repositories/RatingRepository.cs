@@ -3,6 +3,7 @@ using Dapper;
 using MovieRadar.Data;
 using MovieRadar.Data.Entities.Models;
 using MovieRadar.Domain.Interfaces;
+using System.Reflection.Metadata;
 
 namespace MovieRadar.Domain.Repositories
 {
@@ -26,6 +27,15 @@ namespace MovieRadar.Domain.Repositories
             }
         }
 
+        public async Task<Rating> GetById(int id)
+        {
+            var query = "SELECT * FROM Rating WHERE id = @id";
+            using (var connection = _dbConnection.CreateConnection())
+            {
+                var review = await connection.QueryFirstOrDefaultAsync<Rating>(query, new { id });
+                return review;
+            }
+        }
 
         public async Task Add(Rating rating)
         {
@@ -33,6 +43,16 @@ namespace MovieRadar.Domain.Repositories
             using (var connection = _dbConnection.CreateConnection())
             {
                 await connection.ExecuteAsync(query, rating);
+
+            }
+        }
+
+        public async Task Delete(int userId, int movieId)
+        {
+            var query = "DELETE FROM Ratings WHERE userId = @userId AND movieId = @movieId";
+            using (var connection = _dbConnection.CreateConnection())
+            {
+                await connection.ExecuteAsync(query, new {userId, movieId});
 
             }
         }

@@ -141,12 +141,16 @@ body {
 
 .modal-form {
   position: absolute;
-  padding: 3rem 4rem;
+  padding: 2rem 3rem;
   bottom: 20%;
   left: 30%;
   background-color: white;
   border: 2px solid rgb(212, 212, 212);
   border-radius: 5px;
+}
+
+.modal-review {
+  min-width: 50%;
 }
 
 .rate-wrapper {
@@ -181,6 +185,14 @@ body {
   pointer-events: none;
 }
 
+.review-wrapper textarea {
+  margin-block: 1rem;
+  min-height: 100px;
+  width: 100%;
+  resize: none;
+  padding: 5px 10px;
+}
+
 @media (max-width: 768px) {
   .info-wrapper {
     width: 100%;
@@ -205,5 +217,9 @@ body {
     padding: 1rem 2rem;
     bottom: 25%;
     left: 10%;
+  }
+
+  .modal-review {
+    min-width: 80%;
   }
 }

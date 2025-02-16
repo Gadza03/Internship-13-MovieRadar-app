@@ -3,6 +3,7 @@ import { formatDate } from "./utils.js";
 
 const params = new URLSearchParams(window.location.search);
 const movieId = params.get("id");
+const mainContainer = document.querySelector(".info-wrapper");
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeMovieDetails();
@@ -18,11 +19,38 @@ document.addEventListener("DOMContentLoaded", () => {
   reviewBtn.addEventListener("click", handleReview);
 });
 
-function handleRating() {
-  const mainContainer = document.querySelector(".info-wrapper");
-  document.body.classList.add("no-scroll"); // Sprečava interakciju sa pozadinom
+function handleReview() {
+  document.body.classList.add("no-scroll");
 
-  if (document.getElementById("rating-form")) return;
+  const form = document.createElement("form");
+  form.id = "review-form";
+  form.classList.add("modal-form");
+  form.classList.add("modal-review");
+
+  const reviewWrapper = document.createElement("div");
+  reviewWrapper.classList.add("review-wrapper");
+
+  reviewWrapper.innerHTML = `
+    <p> Give us a feedback: </p>
+    <textarea placeholder="Enter your review"></textarea>
+  `;
+
+  const submitBtn = createButton("Submit", "submit", "modal-submit");
+  const cancelBtn = createButton("Cancel", "button", "modal-cancel", () =>
+    closeModal(form)
+  );
+
+  form.style.pointerEvents = "auto";
+
+  form.appendChild(reviewWrapper);
+  form.appendChild(submitBtn);
+  form.appendChild(cancelBtn);
+
+  mainContainer.appendChild(form);
+}
+
+function handleRating() {
+  document.body.classList.add("no-scroll");
 
   const form = document.createElement("form");
   form.id = "rating-form";
@@ -41,20 +69,10 @@ function handleRating() {
     `;
   }
 
-  const submitBtn = document.createElement("button");
-  submitBtn.textContent = "Submit";
-  submitBtn.type = "submit";
-  submitBtn.classList.add("modal-submit");
-
-  const cancelBtn = document.createElement("button");
-  cancelBtn.textContent = "Cancel";
-  cancelBtn.type = "button";
-  cancelBtn.classList.add("modal-cancel");
-
-  cancelBtn.addEventListener("click", () => {
-    document.body.classList.remove("no-scroll");
-    form.remove();
-  });
+  const submitBtn = createButton("Submit", "submit", "modal-submit");
+  const cancelBtn = createButton("Cancel", "button", "modal-cancel", () =>
+    closeModal(form)
+  );
 
   form.style.pointerEvents = "auto";
   form.appendChild(rateWrapper);
@@ -62,6 +80,20 @@ function handleRating() {
   form.appendChild(cancelBtn);
 
   mainContainer.appendChild(form);
+}
+
+function createButton(text, type, className, onClick) {
+  const button = document.createElement("button");
+  button.textContent = text;
+  button.type = type;
+  button.classList.add(className);
+  if (onClick) button.addEventListener("click", onClick);
+  return button;
+}
+
+function closeModal(form) {
+  document.body.classList.remove("no-scroll");
+  form.remove();
 }
 
 function switchTab(selectedTab) {

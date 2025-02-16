@@ -13,6 +13,13 @@ export function Show() {
       const ratingInput = document.getElementById("rating-input");
       const filterButton = document.getElementById("filter-button");
 
+      const showUsersBtn = document.getElementById("show-users");
+      if (showUsersBtn) {
+        showUsersBtn.addEventListener("click", () => {
+          window.location.href = "../pages/all-users.html";
+        });
+      }
+
       let allGenres = JSON.parse(localStorage.getItem("genres")) || [];
 
       allGenres.forEach((genre) => {

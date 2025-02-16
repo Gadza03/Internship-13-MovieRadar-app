@@ -66,6 +66,28 @@ export async function LoadFilteredFilms(
   }
 }
 
+export async function getAllUsers() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/users/all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      alert("Error fetching users:", response.status);
+      return null;
+    }
+
+    return await response.json();
+  } catch (error) {
+    alert("Error fetching users:", error);
+    return null;
+  }
+}
+
 export async function loginUser(email, password) {
   email = email.toLowerCase();
 

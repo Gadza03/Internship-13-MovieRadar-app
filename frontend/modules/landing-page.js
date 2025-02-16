@@ -18,9 +18,6 @@ function displayFilms() {
   films.forEach((film) => {
     let filmCard = document.createElement("div");
     filmCard.classList.add("film-card");
-    filmCard.addEventListener("click", () => {
-      window.location.href = `single-film.html?id=${film.id}`;
-    });
 
     // Title
     let filmTitle = document.createElement("h3");
@@ -50,6 +47,10 @@ function displayFilms() {
     let filmPicture = document.createElement("img");
     filmPicture.src = "../assets/images/interstellar-movie.jpg";
     filmPicture.classList.add("film-picture-hidden");
+
+    filmPicture.addEventListener("click", () => {
+      window.location.href = `single-film.html?id=${film.id}`; 
+    });
 
     const adminFuncttionContainer = document.createElement("div");
     adminFuncttionContainer.id = "admin-functions-container";
@@ -115,12 +116,11 @@ function displayAdminButtons() {
           button.classList.remove("hidden");
         });
       });
-    });
 
-    filmCards.forEach((filmCard) => {
       filmCard.addEventListener("mouseleave", () => {
         let adminButtons = filmCard.querySelector("#admin-functions-container");
         adminButtons.classList.add("hidden");
+        let buttons = filmCard.querySelectorAll(".admin-button"); // move this inside the event handler
         buttons.forEach((button) => {
           button.classList.add("hidden");
         });
@@ -130,3 +130,4 @@ function displayAdminButtons() {
     adminPanel.appendChild(addFilmButton);
   }
 }
+

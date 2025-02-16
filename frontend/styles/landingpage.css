@@ -172,5 +172,15 @@ nav button:hover{
     background-color: #4CAF50;
     cursor: pointer;
 }
+.admin-functions-container{
+   margin-top: -50px;
+   display: flex;
+   gap: 20px;
+}
 
+.film-card .admin-button{
+    margin-top: 0;
+    font-size: 12px;
+
+}
 /* Crvena boja je dodana kako bi se lakše uočilo da je stil primijenjen na stranicu */

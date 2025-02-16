@@ -50,6 +50,27 @@ function displayFilms(){
         //filmPicture.src = film.imageUrl;
         filmPicture.src = '../assets/images/interstellar-movie.jpg';
         filmPicture.classList.add('film-picture-hidden');
+
+        const adminFuncttionContainer = document.createElement('div');
+        adminFuncttionContainer.id='admin-functions-container';
+        adminFuncttionContainer.classList.add('.hidden');
+        const editFilmButton = document.createElement('button');
+        editFilmButton.innerHTML = 'Izmjeni film';
+        editFilmButton.classList.add('admin-button');
+        editFilmButton.classList.add('hidden');
+        editFilmButton.id='edit-film-button';
+        editFilmButton.addEventListener('click', () => {
+            window.location.href='./edit-film.html';
+        });
+
+        const deleteFilmButton =document.createElement('button', 'Izbrisi film');
+        deleteFilmButton.innerHTML = 'Izbrisi film';
+        deleteFilmButton.classList.add('admin-button');
+        deleteFilmButton.classList.add('hidden');
+        deleteFilmButton.id='delete-film-button';
+        deleteFilmButton.addEventListener('click', () => {
+            window.location.replace('./delete-film.html');
+        });
         
 
         // Append elements
@@ -60,6 +81,9 @@ function displayFilms(){
         filmCard.appendChild(filmYear);
         filmCard.appendChild(filmPicture);
         filmCard.appendChild(filmPicture);
+        adminFuncttionContainer.appendChild(editFilmButton);
+        adminFuncttionContainer.appendChild(deleteFilmButton);
+        filmCard.appendChild(adminFuncttionContainer);
 
         container.appendChild(filmCard);
     });
@@ -79,25 +103,34 @@ function displayAdminButtons(){
        addFilmButton.innerHTML = 'Dodaj film';
        addFilmButton.classList.add('admin-button');
        addFilmButton.addEventListener('click', () => {
-        window.location.replace('./add-film.html');
+        window.location.href='./add-film.html';
+    });
+    let filmCards = document.querySelectorAll('.film-card');
+
+    filmCards.forEach(filmCard => {
+        filmCard.addEventListener('mouseenter', () => {
+            let adminButtons = filmCard.querySelector('#admin-functions-container');
+            adminButtons.classList.remove('hidden');
+            adminButtons.classList.add('admin-functions-container');
+            let buttons = filmCard.querySelectorAll('.admin-button');
+            buttons.forEach(button => {
+                button.classList.remove('hidden');
+            });
+        });
     });
 
-        const editFilmButton = document.createElement('button');
-        editFilmButton.innerHTML = 'Izmjeni film';
-        editFilmButton.classList.add('admin-button');
-        editFilmButton.addEventListener('click', () => {
-            window.location.replace('./edit-film.html');
+    filmCards.forEach(filmCard => {
+        filmCard.addEventListener('mouseleave', () => {
+            let adminButtons = filmCard.querySelector('#admin-functions-container');
+            adminButtons.classList.add('hidden');
+            buttons.forEach(button => {
+                button.classList.add('hidden');
+            });
         });
+    });
 
-        const deleteFilmButton =document.createElement('button', 'Izbrisi film');
-        deleteFilmButton.innerHTML = 'Izbrisi film';
-        deleteFilmButton.classList.add('admin-button');
-        deleteFilmButton.addEventListener('click', () => {
-            window.location.replace('./delete-film.html');
-        });
+
 
         adminPanel.appendChild(addFilmButton);
-        adminPanel.appendChild(editFilmButton);
-        adminPanel.appendChild(deleteFilmButton);
     }
 }

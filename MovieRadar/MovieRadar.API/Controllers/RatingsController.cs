@@ -13,8 +13,14 @@ namespace MovieRadar.API.Controllers
     {
 
         private readonly IRatingRepository _ratingRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IMovieRepository _movieRepository;
 
-        public RatingsController(IRatingRepository ratingRepository) => _ratingRepository = ratingRepository;
+        public RatingsController(IRatingRepository ratingRepository, IUserRepository userRepository, IMovieRepository movieRepository){
+            _ratingRepository = ratingRepository;
+            _userRepository = userRepository;
+            _movieRepository = movieRepository;
+        }
 
         [HttpPost]
         [Authorize]
@@ -24,6 +30,20 @@ namespace MovieRadar.API.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            var userById = await _userRepository.GetUserById(rating.UserId);
+            if (userById == null)
+            {
+                return NotFound("User with this id doesn't exisits.");
+
+            }
+
+            var movieById = await _movieRepository.GetSingleMovieInfo(rating.MovieId);
+            if (movieById == null)
+            {
+                return NotFound("Movie with this id doesn't exisits.");
+
             }
 
 

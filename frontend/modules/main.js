@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       getUserByEmail(email);
-      LoadFilms();
+      LoadFilms(0);
     });
   }
 

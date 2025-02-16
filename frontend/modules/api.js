@@ -1,6 +1,6 @@
 const API_BASE_URL = "https://localhost:7092/api";
 
-export async function LoadFilms(){    
+export async function LoadFilms(num){    
     try{
         const res = await fetch(`${API_BASE_URL}/movies`, {
             method: 'GET',
@@ -28,8 +28,13 @@ export async function LoadFilms(){
 
         localStorage.setItem("films", JSON.stringify(films));
         localStorage.setItem("genres", JSON.stringify(genres));
-        
-        window.location.href = './pages/landing.html';
+
+        if(num===0){
+            window.location.replace('./pages/landing.html');
+        }
+        else{
+            window.location.replace('./landing.html');
+        }
     }
     catch(err){
         console.log(err);
@@ -129,14 +134,13 @@ export async function logout() {
     credentials: "include",
   });
 
-  window.location.href = "../index.html";
+  window.location.replace("../index.html");
+  //window.location.href = "../index.html";
   initializeLoginRegister();
 }
 
 export async function AddFilm(film){
     try{
-      console.log(JSON.stringify(film));
-      
         const res = await fetch(`${API_BASE_URL}/movies`, {
             method: 'POST',
             headers: {
@@ -147,9 +151,10 @@ export async function AddFilm(film){
 
         if(!res.ok){
             throw new Error('Failed to add film');
-        }
-
+        } 
+        
         const newMovie=await res.json();
+
 
         let movies=JSON.parse(localStorage.getItem("films"));
         movies.push(newMovie);

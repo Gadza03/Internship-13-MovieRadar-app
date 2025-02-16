@@ -79,21 +79,21 @@ function displayAdminButtons(){
        addFilmButton.innerHTML = 'Dodaj film';
        addFilmButton.classList.add('admin-button');
        addFilmButton.addEventListener('click', () => {
-        window.location.href = './add-film.html';
+        window.location.replace('./add-film.html');
     });
 
         const editFilmButton = document.createElement('button');
         editFilmButton.innerHTML = 'Izmjeni film';
         editFilmButton.classList.add('admin-button');
         editFilmButton.addEventListener('click', () => {
-            window.location.href = './edit-film.html';
+            window.location.replace('./edit-film.html');
         });
 
         const deleteFilmButton =document.createElement('button', 'Izbrisi film');
         deleteFilmButton.innerHTML = 'Izbrisi film';
         deleteFilmButton.classList.add('admin-button');
         deleteFilmButton.addEventListener('click', () => {
-            window.location.href = './delete-film.html';
+            window.location.replace('./delete-film.html');
         });
 
         adminPanel.appendChild(addFilmButton);

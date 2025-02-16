@@ -1,4 +1,4 @@
-import { AddFilm } from "./api.js";
+import { AddFilm, LoadFilms } from "./api.js";
 
 export function CreateFilm(event){
     event.preventDefault();

@@ -35,8 +35,7 @@ namespace MovieRadar.API.Controllers
             {
                 return BadRequest("Movie data is invalid.");
             }
-            Console.WriteLine($"Received release year: {movie.ReleaseYear}");
-            Console.WriteLine($"Full JSON: {JsonSerializer.Serialize(movie)}");
+
             var newMovie = new Movie
             {
                 Title = movie.Title,
@@ -50,7 +49,7 @@ namespace MovieRadar.API.Controllers
             };
             Console.WriteLine($"New Movie -{newMovie.Id} Title: {newMovie.Title}, Description: {newMovie.Description}, GenreId: {newMovie.GenreId}, ReleaseYear: {newMovie.ReleaseYear}, AverageRating: {newMovie.AverageRating}, ImageUrl: {newMovie.ImageUrl}, CreatedAt: {newMovie.CreatedAt}, UpdatedAt: {newMovie.UpdatedAt}");
             await _movieRepository.CreateMovie(newMovie);
-            return Ok();
+            return Ok(newMovie);
         }
 
 

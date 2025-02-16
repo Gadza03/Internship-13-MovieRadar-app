@@ -26,7 +26,8 @@ body {
 }
 
 .info-wrapper {
-  margin-top: 1rem;
+  position: relative;
+  margin-block: 1rem;
   max-width: 1000px;
   background-color: white;
   padding-block: 3rem;
@@ -85,18 +86,32 @@ body {
 }
 
 .tabs {
-  margin-top: 3rem;
+  margin-top: 1rem;
   display: flex;
   width: 100%;
   gap: 3rem;
 }
 
+.take-action {
+  margin-block: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-buttons button {
+  padding: 8px 24px;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid var(--blue-color);
+  border-radius: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
 .rating-info {
   display: flex;
-  border: 2px solid rgb(212, 212, 212);
-  padding: 8px 24px;
-  border-radius: 5px;
-  margin-bottom: 10px;
   justify-content: space-between;
 }
 
@@ -124,6 +139,48 @@ body {
   font-weight: bolder;
 }
 
+.modal-form {
+  position: absolute;
+  padding: 3rem 4rem;
+  bottom: 20%;
+  left: 30%;
+  background-color: white;
+  border: 2px solid rgb(212, 212, 212);
+  border-radius: 5px;
+}
+
+.rate-wrapper {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.modal-form button {
+  padding: 8px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-submit {
+  border: 2px solid green;
+  background-color: rgb(191, 233, 191);
+  margin-right: 10px;
+}
+
+.modal-cancel {
+  border: 2px solid red;
+  background-color: rgb(224, 172, 172);
+}
+
+.single-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-scroll {
+  pointer-events: none;
+}
+
 @media (max-width: 768px) {
   .info-wrapper {
     width: 100%;
@@ -142,5 +199,11 @@ body {
 
   .info-details {
     align-self: flex-start;
+  }
+
+  .modal-form {
+    padding: 1rem 2rem;
+    bottom: 25%;
+    left: 10%;
   }
 }

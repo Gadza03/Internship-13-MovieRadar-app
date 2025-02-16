@@ -1,3 +1,5 @@
+import { RemoveFilm } from "./api.js";
+
 export function Show(){
     document.addEventListener("DOMContentLoaded", function () {
         if (window.location.pathname.includes('landing.html')) {
@@ -55,21 +57,25 @@ function displayFilms(){
         adminFuncttionContainer.id='admin-functions-container';
         adminFuncttionContainer.classList.add('.hidden');
         const editFilmButton = document.createElement('button');
-        editFilmButton.innerHTML = 'Izmjeni film';
+        editFilmButton.innerHTML = 'Edit Movie';
         editFilmButton.classList.add('admin-button');
         editFilmButton.classList.add('hidden');
         editFilmButton.id='edit-film-button';
         editFilmButton.addEventListener('click', () => {
+            event.stopPropagation(); 
+            localStorage.setItem("selectedFilm", JSON.stringify(film));
             window.location.href='./edit-film.html';
         });
 
         const deleteFilmButton =document.createElement('button', 'Izbrisi film');
-        deleteFilmButton.innerHTML = 'Izbrisi film';
+        deleteFilmButton.innerHTML = 'Delete Movie';
         deleteFilmButton.classList.add('admin-button');
         deleteFilmButton.classList.add('hidden');
         deleteFilmButton.id='delete-film-button';
         deleteFilmButton.addEventListener('click', () => {
-            window.location.replace('./delete-film.html');
+            event.stopPropagation(); 
+            localStorage.setItem("selectedFilm", JSON.stringify(film));
+            DeleteFilm();//triba na hover dobit id filma
         });
         
 
@@ -100,7 +106,7 @@ function displayAdminButtons(){
         adminPanel.classList.remove('hidden');
 
        const addFilmButton = document.createElement('button');
-       addFilmButton.innerHTML = 'Dodaj film';
+       addFilmButton.innerHTML = 'Add Movie';
        addFilmButton.classList.add('admin-button');
        addFilmButton.addEventListener('click', () => {
         window.location.href='./add-film.html';

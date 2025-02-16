@@ -74,7 +74,7 @@ namespace MovieRadar.API.Controllers
             movieToUpdate.ImageUrl = movie.ImageUrl;
             movieToUpdate.UpdatedAt = DateTime.Now;
             await _movieRepository.UpdateMovie(id, movieToUpdate);
-            return Ok();
+            return Ok(movieToUpdate);
         }
 
 

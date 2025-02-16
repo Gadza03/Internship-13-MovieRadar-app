@@ -36,16 +36,13 @@ namespace MovieRadar.API.Controllers
             if (userById == null)
             {
                 return NotFound("User with this id doesn't exisits.");
-
             }
 
             var movieById = await _movieRepository.GetSingleMovieInfo(rating.MovieId);
             if (movieById == null)
             {
                 return NotFound("Movie with this id doesn't exisits.");
-
             }
-
 
             var existingRating = await _ratingRepository.RatingByUserAndMovie(rating.UserId, rating.MovieId);
 

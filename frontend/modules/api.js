@@ -55,8 +55,6 @@ export async function LoadFilteredFilms(
     if (sortBy) params.append("sortBy", sortBy);
 
     url.search = params.toString();
-    console.log(url);
-    console.log(url.search);
 
     const res = await fetch(url.toString(), {
       method: "GET",

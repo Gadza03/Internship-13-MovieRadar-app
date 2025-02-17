@@ -112,6 +112,9 @@ function displayFilms(films = null) {
     let filmTitle = document.createElement("h3");
     filmTitle.innerHTML = film.title;
     filmTitle.classList.add("film-title");
+    filmTitle.addEventListener("click", () => {
+      window.location.href = `single-film.html?id=${film.id}`;
+    });
 
     // Description
     let filmDescription = document.createElement("p");
@@ -209,7 +212,7 @@ function displayAdminButtons() {
       filmCard.addEventListener("mouseleave", () => {
         let adminButtons = filmCard.querySelector("#admin-functions-container");
         adminButtons.classList.add("hidden");
-        let buttons = filmCard.querySelectorAll(".admin-button"); // move this inside the event handler
+        let buttons = filmCard.querySelectorAll(".admin-button");
         buttons.forEach((button) => {
           button.classList.add("hidden");
         });

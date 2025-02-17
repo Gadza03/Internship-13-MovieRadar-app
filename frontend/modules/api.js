@@ -158,6 +158,7 @@ export async function getUsers() {
   if (response.status === 401) {
     alert("Your session has expired. Please log in again.");
     logout();
+    localStorage.clear();
     return null;
   }
 

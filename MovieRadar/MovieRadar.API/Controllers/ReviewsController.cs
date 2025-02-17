@@ -43,7 +43,7 @@ namespace MovieRadar.API.Controllers
                 return NotFound("Movie with this id doesn't exisits.");
             }
 
-            var existingReview = await _reviewRepository.ReviewByUserAndMovie(review.MovieId, review.MovieId);
+            var existingReview = await _reviewRepository.ReviewByUserAndMovie(review.UserId, review.MovieId);
 
             if (existingReview != null)
             {

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link
+      rel="icon"
+      href="../assets/icons/movie-icon.png"
+      type="image/x-icon"
+    />
+
+    <title>Movie Radar</title>
+  </head>
+  <body>
+    <div class="all-users-container">
+      <h1>All Users</h1>
+      <button id="all-users-back-button">Back</button>
+
+      <p id="all-users-error-message"></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Review Count</th>
+            <th>Average Rating</th>
+          </tr>
+        </thead>
+        <tbody id="all-users-table-body"></tbody>
+      </table>
+    </div>
+
+    <script src="../modules/main.js" type="module"></script>
+    <script src="../modules/api.js" type="module"></script>
+    <script src="../modules/all-users.js" type="module"></script>
+  </body>
+</html>

@@ -97,6 +97,7 @@ namespace MovieRadar.Domain.Repositories
             }
         }
 
+
         public async Task DeleteMovie(int id)
         {
             var sql = "DELETE FROM movies WHERE id = @Id";
@@ -111,7 +112,48 @@ namespace MovieRadar.Domain.Repositories
             var sql = "UPDATE movies SET title = @Title, description = @Description, genreid = @GenreId, releaseyear = @ReleaseYear, averagerating = @AverageRating, imageurl = @ImageUrl, updatedat = @UpdatedAt WHERE id = @Id";
             using (var connection = _dbConnection.CreateConnection())
             {
-                await connection.ExecuteAsync(sql, new { Id = id, movie.Title, movie.Description, movie.GenreId, movie.ReleaseYear, movie.AverageRating, movie.ImageUrl, movie.UpdatedAt });
+                await connection.ExecuteAsync(sql, new { Id = id, movie.Title, movie.Description, movie.GenreId, movie.ReleaseYear, movie.AverageRating, movie.ImageUrl, movie.UpdatedAt }); 
+            } 
+        }
+
+        public async Task<IEnumerable<Movie>> GetFilteredMovies(int? genreId, int? releaseYear, float? minRating, string sortBy)
+        {
+            var sql = "SELECT * FROM MOVIES WHERE 1=1";
+
+            if (genreId.HasValue)
+                sql += " AND genreid = @GenreId";
+
+            if (releaseYear.HasValue)
+                sql += " AND releaseyear = @ReleaseYear";
+
+            if (minRating.HasValue)
+                sql += " AND averagerating >= @MinRating";
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                sql += " ORDER BY ";
+                switch (sortBy.ToLower())
+                {
+                    case "year":
+                        sql += "releaseyear DESC";
+                        break;
+                    case "rating":
+                        sql += "averagerating DESC";
+                        break;
+                    case "genre":
+                        sql += "genreid";
+                        break;
+                    default:
+                        sql += "id";
+                        break;
+                }
+            }
+
+            using (var connection = _dbConnection.CreateConnection())
+            {
+                var movies = await connection.QueryAsync<Movie>(sql, new { GenreId = genreId, ReleaseYear = releaseYear, MinRating = minRating });
+                return movies.ToList();
+
             }
         }
 

@@ -4,44 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/style.css" />
-    <link rel="icon" href="./assets/icons/movie-icon.png" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="../assets/icons/movie-icon.png"
+      type="image/x-icon"
+    />
 
     <title>Movie Radar</title>
   </head>
   <body>
-  
     <!--Landing Page-->
     <div class="landing-page-wrapper">
       <nav>
         <button class="hidden" id="show-users">Show all users</button>
-        <button>Log out</button>
+        <button id="logout-button">Log out</button>
       </nav>
-        <header class="landing-page-text">
-            <h1>Welcome to Movie Radar</h1>
-            <p>
-               Website for all film lovers. One place for all the info.
-            </p>
-        </header>
-        <div class="admin-functions hidden"></div>
+      <header class="landing-page-text">
+        <h1>Welcome to Movie Radar</h1>
+        <p>Website for all film lovers. One place for all the info.</p>
+      </header>
+      <div class="admin-functions hidden"></div>
 
-        <div class="landing-page-filter">
-            <span>Sort</span>
-            <select id="select-filter">
-                <option value="Default">Default</option>
-                <option value="Title">Genre</option>
-                <option value="Year">Release Year</option>
-                <option value="Genre">Rating</option>
-            </select>
-        </div>
-        <div class="landing-page-movies"></div>
+      <div class="landing-page-filter">
+        <span>Sort</span>
+        <select id="select-filter">
+          <option value="Default">Default</option>
+          <option value="Genre">Genre</option>
+          <option value="Year">Release Year</option>
+          <option value="Rating">Rating</option>
+        </select>
+        <select id="genre-dropdown" class="hidden">
+          <option value="">Select Genre</option>
+        </select>
+        <input
+          type="number"
+          id="year-input"
+          placeholder="Enter Release Year"
+          class="hidden"
+        />
+        <input
+          type="number"
+          step="0.1"
+          id="rating-input"
+          placeholder="Min Rating (e.g., 4.0)"
+          class="hidden"
+        />
+        <button id="filter-button" class="hidden">Apply Filter</button>
+      </div>
+      <div class="landing-page-movies"></div>
     </div>
 
-    
     <script src="../modules/main.js" type="module"></script>
     <script src="../modules/api.js" type="module"></script>
     <script type="module">
       import { Show } from "../modules/landing-page.js";
-      Show(); 
+      Show();
     </script>
   </body>
 </html>

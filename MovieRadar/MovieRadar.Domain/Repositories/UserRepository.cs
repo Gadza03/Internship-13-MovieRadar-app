@@ -57,5 +57,26 @@ namespace MovieRadar.Domain.Repositories
             }
         }
 
+        public async Task<IEnumerable<UserStatsDto>> GetAllUsersWithStats()
+        {
+            var sql = @"
+                SELECT 
+                    u.id,
+                    u.firstname,
+                    u.lastname,
+                    COUNT(DISTINCT rv.id) AS reviewCount,
+                    ROUND(AVG(r.ratingvalue), 2) AS averageRating
+                FROM users u
+                LEFT JOIN reviews rv ON u.id = rv.userid
+                LEFT JOIN ratings r ON u.id = r.userid
+                GROUP BY u.id, u.firstname, u.lastname
+                ORDER BY reviewCount DESC;";
+
+            using (var connection = _dbConnection.CreateConnection())
+            {
+                var users = await connection.QueryAsync<UserStatsDto>(sql);
+                return users.ToList();
+            }
+        }
     }
 }

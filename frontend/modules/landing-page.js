@@ -1,21 +1,110 @@
 import { DeleteFilm } from "./admin-functions.js";
+import { LoadFilteredFilms } from "../modules/api.js";
+let filteredFilms = [];
 
 export function Show() {
   document.addEventListener("DOMContentLoaded", function () {
     if (window.location.pathname.includes("landing.html")) {
       displayFilms();
       displayAdminButtons();
+
+      const filterSelect = document.getElementById("select-filter");
+      const genreDropdown = document.getElementById("genre-dropdown");
+      const yearInput = document.getElementById("year-input");
+      const ratingInput = document.getElementById("rating-input");
+      const filterButton = document.getElementById("filter-button");
+
+      const showUsersBtn = document.getElementById("show-users");
+      if (showUsersBtn) {
+        showUsersBtn.addEventListener("click", () => {
+          window.location.href = "../pages/all-users.html";
+        });
+      }
+
+      let allGenres = JSON.parse(localStorage.getItem("genres")) || [];
+
+      allGenres.forEach((genre) => {
+        let option = document.createElement("option");
+        option.value = genre.id;
+        option.textContent = genre.name;
+        genreDropdown.appendChild(option);
+      });
+
+      if (filterSelect) {
+        filterSelect.addEventListener("change", async function () {
+          genreDropdown.value = "";
+          yearInput.value = "";
+          ratingInput.value = "";
+
+          genreDropdown.classList.add("hidden");
+          yearInput.classList.add("hidden");
+          ratingInput.classList.add("hidden");
+          filterButton.classList.add("hidden");
+
+          if (this.value === "Genre") {
+            genreDropdown.classList.remove("hidden");
+            filterButton.classList.remove("hidden");
+          } else if (this.value === "Year") {
+            yearInput.classList.remove("hidden");
+            filterButton.classList.remove("hidden");
+          } else if (this.value === "Rating") {
+            ratingInput.classList.remove("hidden");
+            filterButton.classList.remove("hidden");
+          }
+
+          if (this.value.toLowerCase() === "default") {
+            filteredFilms = await LoadFilteredFilms(null, null, null, "year");
+          } else {
+            filteredFilms = await LoadFilteredFilms(
+              null,
+              null,
+              null,
+              this.value.toLowerCase()
+            );
+          }
+
+          displayFilms(filteredFilms);
+        });
+      }
+
+      if (filterButton) {
+        filterButton.addEventListener("click", async function () {
+          let genreId = genreDropdown.value || null;
+          let releaseYear = yearInput.value || null;
+          let minRating = ratingInput.value || null;
+          let sortBy = filterSelect.value.toLowerCase();
+
+          if (this.value.toLowerCase() === "default") {
+            filteredFilms = await LoadFilteredFilms(null, null, null, "year");
+          } else {
+            filteredFilms = await LoadFilteredFilms(
+              genreId,
+              releaseYear,
+              minRating,
+              sortBy
+            );
+          }
+
+          displayFilms(filteredFilms);
+        });
+      }
     }
   });
 }
 
-function displayFilms() {
-  let films = JSON.parse(localStorage.getItem("films")) || [];
+function displayFilms(films = null) {
+  let allFilms = films || JSON.parse(localStorage.getItem("films")) || [];
   let genres = JSON.parse(localStorage.getItem("genres")) || [];
 
   let container = document.querySelector(".landing-page-movies");
+  container.innerHTML = "";
 
-  films.forEach((film) => {
+  if (allFilms.length === 0) {
+    container.innerHTML = "<p>No movies found.</p>";
+    return;
+  }
+
+  allFilms.forEach((film) => {
     let filmCard = document.createElement("div");
     filmCard.classList.add("film-card");
 
@@ -49,7 +138,7 @@ function displayFilms() {
     filmPicture.classList.add("film-picture-hidden");
 
     filmPicture.addEventListener("click", () => {
-      window.location.href = `single-film.html?id=${film.id}`; 
+      window.location.href = `single-film.html?id=${film.id}`;
     });
 
     const adminFuncttionContainer = document.createElement("div");
@@ -130,4 +219,3 @@ function displayAdminButtons() {
     adminPanel.appendChild(addFilmButton);
   }
 }
-

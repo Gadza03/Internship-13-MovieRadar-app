@@ -4,14 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/style.css" />
-    <link rel="icon" href="./assets/icons/movie-icon.png" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="../assets/icons/movie-icon.png"
+      type="image/x-icon"
+    />
 
     <title>Movie Radar</title>
   </head>
   <body>
-
     <header>
-       <h1 class="add-movie-headline">Add a new movie</h1>
+      <h1 class="add-movie-headline">Add a new movie</h1>
     </header>
     <div class="movie-adding-container">
       <form id="add-movie-form" class="movie-form">
@@ -23,25 +26,26 @@
           required
         />
         <textarea
-        id="description"
-        name="description"
-        placeholder="Description"
-        required
-      ></textarea>
-      <label for="genre">Choose a genre:</label>
-      <input list="genres" id="genre" name="genre" class="genres" required />
-      <datalist id="genres">
-          <option value="Action">
-          <option value="Adventure">
-          <option value="Comedy">
-          <option value="Drama">
-          <option value="Horror">
-          <option value="Sci-Fi">
-          <option value="Romance">
-          <option value="Thriller">
-          <option value="Fantasy">
-          <option value="Mystery">
-      </datalist>
+          id="description"
+          name="description"
+          placeholder="Description"
+          required
+        ></textarea>
+        <label for="genre">Choose a genre:</label>
+        <input list="genres" id="genre" name="genre" class="genres" required />
+        <datalist id="genres">
+          <option value="Action"></option>
+          <option value="Adventure"></option>
+          <option value="Comedy"></option>
+          <option value="Drama"></option>
+          <option value="Horror"></option>
+          <option value="Sci-Fi"></option>
+          <option value="Romance"></option>
+          <option value="Thriller"></option>
+          <option value="Fantasy"></option>
+          <option value="Mystery"></option>
+        </datalist>
+
         <input
           type="text"
           id="releaseYear"
@@ -56,11 +60,10 @@
           placeholder="Poster URL"
           required
         />
-        <button type="submit" id="submit-button" >Add movie</button>
+        <button type="submit" id="submit-button">Add movie</button>
       </form>
     </div>
 
-    
     <script src="../modules/main.js" type="module"></script>
     <script src="../modules/api.js" type="module"></script>
     <script type="module">
@@ -68,12 +71,12 @@
       document.addEventListener("DOMContentLoaded", () => {
         const form = document.getElementById("add-movie-form");
 
-      if (form) {
-        form.addEventListener("submit", (event) => CreateFilm(event));
-      } else {
+        if (form) {
+          form.addEventListener("submit", (event) => CreateFilm(event));
+        } else {
           console.error("Form not found!");
-      }
-  });
+        }
+      });
     </script>
   </body>
 </html>

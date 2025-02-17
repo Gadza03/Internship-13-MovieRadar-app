@@ -45,5 +45,12 @@ namespace MovieRadar.API.Controllers
             }
             return Ok(user);
         }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _userRepository.GetAllUsersWithStats();
+            return Ok(users);
+        }
     }
 }

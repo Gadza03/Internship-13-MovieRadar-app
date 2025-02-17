@@ -11,5 +11,7 @@ namespace MovieRadar.Domain.Interfaces
         public Task CreateUser(User user);
         public Task<User> GetUserById(int id);
 
+        public Task<IEnumerable<UserStatsDto>> GetAllUsersWithStats();
+
     }
 }
